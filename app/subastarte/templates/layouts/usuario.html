@@ -1,0 +1,38 @@
+{% extends "./base.html" %} 
+{% load filters %}
+
+{% block content %}
+    <div class="wrapper">
+        <div class="d-flex">
+            <nav class="sidebar active">
+                {% include '../blocks/usuario-sidebar.html' %}
+            </nav>
+            <div class="main">
+                {% block nav %}
+                    <div class="alert alert-warning">
+                        <a href="{% url 'public:index' %}">Salir a la pantalla pública</a>
+                    </div>
+                {% endblock %}
+                {% include 'blocks/subnav.html' %}
+                <main class="content">
+                    <div class="container-fluid d-flex flex-column p-0">
+                        {% block subnav %}
+                        {% endblock %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        {% block subcontent %}
+                        {% endblock %}
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+{% endblock %}

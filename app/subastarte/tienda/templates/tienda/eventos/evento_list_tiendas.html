@@ -1,0 +1,52 @@
+{% extends "layouts/tienda.html" %} 
+
+{% block subnav %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h3">Eventos <small>Listado de organizadores</small></h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <a class="float-right btn btn-sm btn-outline-primary" href="{% url 'tienda:eventos:list' %}">Volver</a>
+                <a class="float-right btn btn-sm btn-outline-primary mr-1" href="{% url 'tienda:eventos:event_add_tienda' organiza_id %}">Añadir nuevo</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+
+<div class="alert alert-info" role="alert">
+    Solo es posible cancelar la participación propia a un Evento.
+</div>
+
+<table id="eventos" class="table table-striped table-bordered dataTable no-footer" style="width:100%">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>e-mail</th>
+            <th>Alcance</th>
+            <th>País</th>
+            <th>Fecha añadida</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for elem in data %}
+            <tr>
+                <td>{{ elem.tienda.nombre }}</td>
+                <td>{{ elem.tienda.email }}</td>
+                <td>{{ elem.tienda.get_alcance_display }}</td>
+                <td>{{ elem.tienda.pais }}</td>
+                <td>{{ elem.created }}</td>
+                <td>
+                    {% if elem.tienda.pk == user.contacto.tienda.pk %}
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a class="text-danger" href="{% url 'tienda:eventos:event_remove_tienda' elem.pk %}" onclick="if (confirm('\u00bfDesea salir del evento?')) { return true; } return false;">Borrar</a></li>
+                    </ul>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

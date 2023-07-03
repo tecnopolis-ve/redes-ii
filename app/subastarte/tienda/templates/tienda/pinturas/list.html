@@ -1,0 +1,55 @@
+{% extends "layouts/tienda.html" %} 
+
+{% block subnav %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h3">Pinturas</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <a class="float-right btn btn-sm btn-outline-primary" href="{% url 'tienda:articulos:pintura_new' %}">Agregar nuevo</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+
+<table id="pinturas" class="table table-striped table-bordered dataTable no-footer" style="width:100%">
+    <thead>
+        <tr>
+            <th></th>
+            <th>NUR</th>
+            <th>Estilo</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Año</th>
+            <th>Dimensiones</th>
+            <th>Comprador</th>
+            <th>Últ. Modificación</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for elem in data %}
+            <tr>
+                <td>{% if elem.imagen_thumb %}<img src="{{ elem.imagen_thumb.url }}" alt="{{ elem.titulo }}" width="100" />{% endif %}</td>
+                <td>{{ elem.nur }}</td>
+                <td>{{ elem.estilo }}</td>
+                <td>{{ elem.titulo }}</td>
+                <td>---</td>
+                <td>{{ elem.anyo }}</td>
+                <td>{{ elem.dimensiones }}</td>
+                <td>--</td>
+                <td>{{ elem.modified }}</td>
+                <td>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="{% url 'tienda:articulos:pintura_detail' elem.nur %}">Ver</a></li>
+                        <li class="list-inline-item"><a href="{% url 'tienda:articulos:pintura_edit' elem.nur %}">Editar</a></li>
+                        <li class="list-inline-item"><a class="text-danger" href="{% url 'tienda:articulos:pintura_delete' elem.nur %}" onclick="if (confirm('\u00bfDesea eliminar el registro?')) { return true; } return false;">Borrar</a></li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

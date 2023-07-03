@@ -1,0 +1,38 @@
+
+{% extends "layouts/tienda.html" %} 
+
+{% block subnav %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h3">Artista <small>Ver detalle</small></h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <a class="float-right btn btn-sm btn-outline-primary" href="{% url 'tienda:artistas:edit' artista.pk %}">Editar</a>
+                <a class="float-right btn btn-sm btn-outline-primary mr-1" href="{% url 'tienda:artistas:list' %}">Volver</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <td><strong>Nombre artístico</strong></td>
+                        <td>{{ artista.nombre_artistico }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nombre real</strong></td>
+                        <td>{{ artista.apellido }}, {{ artista.nombre }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

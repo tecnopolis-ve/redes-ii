@@ -1,0 +1,32 @@
+{% extends "layouts/public.html" %} 
+
+{% block nav %}
+
+{% endblock %}
+
+{% block body %}
+
+<div class="container mb-5" >
+    {% if data %}
+        <div class="row row-cols-1 row-cols-md-4">
+        {% for item in data %}
+            <div class="col mb-4">
+                <div class="card h-100">
+                    {% if item.pintura.imagen_thumb %}
+                        <img class="card-img-top" src="{{ item.pintura.imagen_thumb.url }}" alt="" />
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'public:organizadores:detail' item.pk %}">{{ item.nombre }}</a></h5>
+                        <p class="card-text"><i>{{ item.proposito|linebreaks|truncatechars:64 }}</i></p>
+                        <p class="card-text">{{ item.website }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    {% else %}
+        <p>Nada que mostrar.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

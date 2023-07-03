@@ -1,0 +1,160 @@
+{% extends "layouts/public.html" %} 
+
+{% block nav %}
+
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>{% if evento.cancelado %}<del>{{ evento.nombre }}</del>{% else %}{{ evento.nombre }}{% endif %} {% if not evento.cancelado %}<span class="badge badge-info badge-headed">{{ evento.estado }}</span>{% endif %}</h1>
+    <h3>{% if evento.cancelado %}<del>{{ evento.fecha }}</del>{% else %}{{ evento.fecha }}{% endif %}</h3>
+    {% if evento.cancelado %}
+        <h5 class="text-danger">Este evento ha sido cancelado.</h5>
+    {% else %}
+        {% if participante and evento_activo %}
+            <h5 class="text-success">Estás inscrito en este evento.</h5>
+        {% endif %}
+    {% endif %}
+    <div class="row mt-5">
+        <div class="col-sm">
+            <h5>Detalles del evento</h5>
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td><strong>Tipo de evento</strong></td>
+                        <td>{{ evento.get_tipo_display }}</td>
+                    </tr>
+                    {% if evento.tipo == 'VIRTUAL' %}
+                        <tr>
+                            <td><strong>Alcance</strong></td>
+                            <td>
+                                {% if tiendas %}
+                                    {% if tiendas|length > 1 %}
+                                        Según organizador
+                                    {% else %}
+                                        {% for tienda in tiendas %}
+                                            {% if tienda.tienda.alcance == 'LOCAL' %}
+                                                {{ tienda.tienda.pais }}
+                                            {% else %}
+                                                {{ tienda.tienda.get_alcance_display }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td><strong>Dirección</strong></td>
+                            <td>{{ evento.lugar_subasta|linebreaksbr }}</td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <td><strong>Duración</strong></td>
+                        <td>{{ evento.horas }} horas</td>
+                    </tr>
+                    {% if user.is_authenticated %}
+                        <tr>
+                            <td><strong>Costo de inscripción</strong></td>
+                            <td>
+                                {% if cliente %}
+                                    {{ evento.costo_ins_client_display }}
+                                {% else %}
+                                    {{ evento.costo_ins_general_display }}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td><strong>Costo inscripción público general</strong></td>
+                            <td>{{ evento.costo_ins_general_display }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Costo inscripción clientes</strong></td>
+                            <td>{{ evento.costo_ins_client_display }}</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm">
+            <h5>Organizadores</h5>
+            {% if tiendas %}
+                <table class="table table-borderless">
+                    <tbody>
+                        {% for tienda in tiendas %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'public:organizadores:detail' tienda.tienda.pk %}">{{ tienda.tienda.nombre }}</a> - <span class="text-muted">{{ tienda.tienda.pais }}</span>
+                                    <i>{{ tienda.tienda.proposito|linebreaks|truncatechars:192 }}</i>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No disponible.</p>
+            {% endif %}
+        </div>
+    </div>
+    {% if not participante and not evento.cancelado %}
+        <div class="row mt-5 text-center">
+            <div class="col-sm">
+                <div class="jumbotron">
+                    {% if evento_activo %}
+                        <a class="btn btn-primary btn-lg" href="{% url 'public:subastas:inscribir' evento.pk %}">Inscribirme en este evento</a>
+                    {% else %}
+                        <h3>Este evento ha finalizado.</h3>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if objeto_subasta_evento %}
+        <div class="row mt-5">
+            <div class="col-sm">
+                <h4><a href="{% url 'public:articulos:list_subasta' evento.pk %}">Artículos en catálogo</a></h4>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-sm">
+                <div class="row row-cols-1 row-cols-md-5">
+                    {% for item in objeto_subasta_evento %}
+                        <div class="col mb-4">
+                            <div class="card h-100">
+                                {% if item.moneda %}
+                                    {% if item.moneda.imagen_thumb %}
+                                        <img class="card-img-top" src="{{ item.moneda.imagen_thumb.url }}" alt="" />
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <h5 class="card-title"><a href="{% url 'public:articulos:detail_subasta' 'moneda' item.moneda.pk evento.pk %}">{{ item.moneda.nombre }}</a></h5>
+                                        <p class="card-text">Tipo: moneda</p>
+                                        <p class="card-text">Precio de salida: {{ item.ask_display }}</p>
+                                        <p class="card-text">{{ item.moneda.motivo }}</p>
+                                        <p class="card-text"><small class="text-muted">NUR: {{ item.moneda.nur }}</small></p>
+                                    </div>
+                                {% else %}
+                                    {% if item.pintura.imagen_thumb %}
+                                        <img class="card-img-top" src="{{ item.pintura.imagen_thumb.url }}" alt="" />
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <h5 class="card-title"><a href="{% url 'public:articulos:detail_subasta' 'pintura' item.pintura.pk evento.pk %}">{{ item.pintura.titulo }}</a></h5>
+                                        {% if item.pintura.titulo_original %}
+                                            <p class="card-text"><i>{{ item.pintura.titulo_original }}</i></p>
+                                        {% endif %}
+                                        <p class="card-text">Tipo: pintura</p>
+                                        <p class="card-text">Precio de salida: {{ item.ask_display }}</p>
+                                        <p class="card-text"><small class="text-muted">NUR: {{ item.pintura.nur }}</small></p>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

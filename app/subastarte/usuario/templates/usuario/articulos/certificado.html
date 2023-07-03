@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<style>
+	@charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Pinyon+Script|Source+Sans+Pro:400,700");
+	html {
+		color: #14213d;
+		font-family: Source Sans Pro;
+		font-size: 11pt;
+		line-height: 1.6;
+	}
+	html body {
+		margin: 0;
+	}
+	html h1 {
+		font-family: Pinyon Script;
+		font-size: 40pt;
+		margin: 0;
+	}
+	html h1, html h2, html p {
+		text-align: center;
+	}
+	.table {
+		margin-left: auto;
+		margin-right: auto;
+		border-collapse: collapse;
+		width: 75%;
+		margin-top: 1.5cm;
+		margin-bottom: 1.5cm;
+	}
+	.table th {
+		border-bottom: 0.2mm solid #a9a;
+		color: #a9a;
+		font-size: 9pt;
+		font-weight: 400;
+		padding-bottom: 0;
+		text-transform: uppercase;
+	}
+	.table td {
+		padding-top: 0;
+	}
+	.table td:last-of-type {
+		text-align: right;
+	}
+	.table th,
+	.table td {
+		text-align: center;
+	}
+	.table th:first-of-type,
+	.table td:first-of-type {
+		text-align: left;
+	}
+	.table th:last-of-type,
+	.table td:last-of-type {
+		text-align: right;
+	}
+	</style>
+	<title>Certificado</title>
+</head>
+
+<body>
+	<p>
+		La organización <i>{{ evento.tienda.nombre }}</i>, emite el siguiente
+	</p>
+	<h1>Certificado de Compra</h1>
+	<p>a nombre de</p>
+	<h2><i>{{ evento.ganador.nombre_completo }}</i></h2>
+	<p>
+		por el cual hace constar que es el genuino poseedor de la siguiente
+		pieza de colección.
+	</p>
+	{% if evento.moneda %}
+	<img src="{{ evento.moneda.imagen_thumb.url }}" />
+	<table class="table">
+		<tbody>
+		<tr>
+			<td><strong>NUR</strong></td>
+			<td>{{ evento.moneda.nur }}</td>
+		</tr>
+		<tr>
+			<td><strong>Nombre</strong></td>
+			<td>{{ evento.moneda.nombre }}</td>
+		</tr>
+		<tr>
+			<td><strong>Divisa</strong></td>
+			<td>{{ evento.moneda.divisa }}</td>
+		</tr>
+		<tr>
+			<td><strong>Denominación</strong></td>
+			<td>{{ evento.moneda.denominacion }}</td>
+		</tr>
+		<tr>
+			<td><strong>Forma</strong></td>
+			<td>{{ evento.moneda.get_forma_display }}</td>
+		</tr>
+		<tr>
+			<td><strong>Metal</strong></td>
+			<td>{{ evento.moneda.get_metal_display }}</td>
+		</tr>
+		<tr>
+			<td><strong>Canto</strong></td>
+			<td>{{ evento.moneda.get_canto_display }}</td>
+		</tr>
+		<tr>
+			<td><strong>Diámetro</strong></td>
+			<td>{{ evento.moneda.diametro }}</td>
+		</tr>
+		<tr>
+			<td><strong>Peso</strong></td>
+			<td>{{ evento.moneda.peso }}</td>
+		</tr>
+		<tr>
+			<td><strong>Año de emisión</strong></td>
+			<td>{{ evento.moneda.anyo_emision }}</td>
+		</tr>
+		<tr>
+			<td><strong>Acuñación</strong></td>
+			<td>{{ evento.moneda.org_acunyacion }}</td>
+		</tr>
+		<tr>
+			<td><strong>País de acuñación</strong></td>
+			<td>{{ evento.moneda.pais_acunyacion }}</td>
+		</tr>
+		<tr>
+			<td><strong>Motivo</strong></td>
+			<td>{{ evento.moneda.motivo }}</td>
+		</tr>
+		<tr>
+			<td><strong>Anverso</strong></td>
+			<td>{{ evento.moneda.anverso }}</td>
+		</tr>
+		<tr>
+			<td><strong>Reverso</strong></td>
+			<td>{{ evento.moneda.reverso }}</td>
+		</tr>
+		<tr>
+			<td><strong>Mintage</strong></td>
+			<td>{{ evento.moneda.total_mintage }}</td>
+		</tr>
+		</tbody>
+	</table>
+	{% else %}
+	<table class="table">
+		<tbody>
+			<tr>
+				<td colspan="2" style="text-align: center; padding-bottom: 1.5cm;">
+					<img src="http://localhost:8000{{ evento.pintura.imagen_thumb.url }}" />
+				</td>
+			</tr>
+			<tr>
+				<td><strong>NUR</strong></td>
+				<td>{{ evento.pintura.nur }}</td>
+			</tr>
+			<tr>
+				<td><strong>Título</strong></td>
+				<td>{{ evento.pintura.titulo }}</td>
+			</tr>
+			{% if evento.pintura.titulo_original %}
+				<tr>
+					<td><strong>Título original</strong></td>
+					<td>{{ evento.pintura.titulo_original }}</td>
+				</tr>
+			{% endif %}
+			<tr>
+				<td><strong>Estilo</strong></td>
+				<td>{{ evento.pintura.estilo }}</td>
+			</tr>
+			<tr>
+				<td><strong>Año</strong></td>
+				<td>{{ evento.pintura.anyo }}</td>
+			</tr>
+			<tr>
+				<td><strong>Dimensiones</strong></td>
+				<td>{{ evento.pintura.dimensiones }}</td>
+			</tr>
+		</tbody>
+	</table>
+	{% endif %}
+	<p>En {{ evento.tienda.pais }}, {{ evento.evento.fecha|date:'d-m-Y' }}</p>
+</body>
+</html>

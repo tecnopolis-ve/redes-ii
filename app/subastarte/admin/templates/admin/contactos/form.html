@@ -1,0 +1,116 @@
+{% extends "layouts/admin.html" %} 
+{% load filters %}
+
+{% block subnav %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h3">Contacto <small>Editar registro</small></h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <a class="float-right btn btn-sm btn-outline-primary mr-1" href="{% url 'staff:tiendas:contactos' tienda_id %}">Volver</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+
+
+<form class="container" method="post" novalidate="novalidate">
+    {% csrf_token %}
+    <div class="form-group row">
+        {{ form.email | label_class:"col-form-label col-sm-2" }}
+        <div class="col-sm-5">
+            {{ form.email | add_class:"form-control" }}
+            {{ form.email.errors }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-form-label col-sm-2">Contraseña</label>
+        <div class="col-sm-4">
+            {{ form.password1 | add_class:"form-control" }}
+            {{ form.password1.errors }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-form-label col-sm-2">Confirmar contraseña</label>
+        <div class="col-sm-4">
+            {{ form.password2 | add_class:"form-control" }}
+            {{ form.password2.errors }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form.nombre | label_class:"col-form-label col-sm-2" }}
+        <div class="col-sm-5">
+            {{ form.nombre | add_class:"form-control" }}
+            {{ form.nombre.errors }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form.segundo_nombre | label_class:"col-form-label col-sm-2" }}
+        <div class="col-sm-5">
+            {{ form.segundo_nombre | add_class:"form-control" }}
+            {{ form.segundo_nombre.errors }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form.apellido | label_class:"col-form-label col-sm-2" }}
+        <div class="col-sm-5">
+            {{ form.apellido | add_class:"form-control" }}
+            {{ form.apellido.errors }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form.segundo_apellido | label_class:"col-form-label col-sm-2" }}
+        <div class="col-sm-5">
+            {{ form.segundo_apellido | add_class:"form-control" }}
+            {{ form.segundo_apellido.errors }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form.telefono | label_class:"col-form-label col-sm-2" }}
+        <div class="col-sm-5">
+            {{ form.telefono | add_class:"form-control" }}
+            {{ form.telefono.errors }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form.cargo | label_class:"col-form-label col-sm-2" }}
+        <div class="col-sm-5">
+            {{ form.cargo | add_class:"form-control" }}
+            {{ form.cargo.errors }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form.fecha_nac | label_class:"col-form-label col-sm-2" }}
+        <div class="col-sm-5">
+            {{ form.fecha_nac | add_class:"form-control" }}
+            {{ form.fecha_nac.errors }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form.tienda | label_class:"col-form-label col-sm-2" }}
+        <div class="col-sm-5">
+            {{ form.tienda | add_class:"form-control" }}
+            {{ form.tienda.errors }}
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="custom-control custom-checkbox col-sm-10 offset-sm-2">
+            {{ form.is_admin | add_class:"custom-control-input" }}
+            <label class="custom-control-label" for="id_is_admin">Administrador</label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="custom-control custom-checkbox col-sm-10 offset-sm-2">
+            {{ form.is_active | add_class:"custom-control-input" }}
+            <label class="custom-control-label" for="id_is_active">Activo</label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

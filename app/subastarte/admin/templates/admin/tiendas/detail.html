@@ -1,0 +1,66 @@
+
+{% extends "layouts/admin.html" %} 
+
+{% block subnav %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h3">Tienda <small>Ver detalle</small></h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <a class="float-right btn btn-sm btn-outline-primary" href="{% url 'staff:tiendas:edit' tienda.pk %}">Editar</a>
+                <a class="float-right btn btn-sm btn-outline-primary mr-1" href="{% url 'staff:tiendas:list' %}">Volver</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm">
+            <h5>Información de tienda</h5>
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <td><strong>ID</strong></td>
+                        <td>{{ tienda.pk }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nombre</strong></td>
+                        <td>{{ tienda.nombre }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Propósito</strong></td>
+                        <td>{{ tienda.proposito|linebreaks }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fecha de inauguración</strong></td>
+                        <td>{{ tienda.fundacion|date:'d-m-Y' }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Web</strong></td>
+                        <td>{{ tienda.website }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>e-mail</strong></td>
+                        <td>{{ tienda.email }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Teléfono</strong></td>
+                        <td>{{ tienda.telefono }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alcance</strong></td>
+                        <td>{{ tienda.get_alcance_display }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>País</strong></td>
+                        <td>{{ tienda.pais }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

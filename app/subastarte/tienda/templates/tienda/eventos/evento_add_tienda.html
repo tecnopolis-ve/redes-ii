@@ -1,0 +1,46 @@
+{% extends "layouts/tienda.html" %} 
+{% load filters %}
+
+{% block subnav %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h3">Eventos <small>Añadir tienda</small></h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <a class="float-right btn btn-sm btn-outline-primary mr-1" href="{% url 'tienda:eventos:list' %}">Volver</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+
+<form method="post" novalidate="novalidate">
+    {% csrf_token %}
+
+    <table id="tiendas" class="table table-striped table-bordered dataTable no-footer" style="width:100%">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Nombre</th>
+                <th>e-mail</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tienda in tiendas %}
+                <tr>
+                    <td>
+                        <input name="tienda_id[]" type="checkbox" value="{{ tienda.pk }}" />
+                    </td>
+                    <td>{{ tienda.nombre }}</td>
+                    <td>{{ tienda.email }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="col-sm-12">
+        <button type="submit" class="btn btn-primary">Añadir seleccionados</button>
+    </div>
+</form>
+
+{% endblock %}

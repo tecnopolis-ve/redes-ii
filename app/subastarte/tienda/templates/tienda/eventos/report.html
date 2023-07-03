@@ -1,0 +1,49 @@
+{% extends "layouts/tienda.html" %} 
+
+{% block subnav %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h3">Eventos <small>Descargar reporte</small></h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <a class="float-right btn btn-sm btn-outline-primary mr-1" href="{% url 'tienda:eventos:list' %}">Volver</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+
+<form class="form-inline">
+	<input type="hidden" name="generar" value="generar" />
+	<div class="form-group mb-2 mr-sm-2">
+		<label for="filtrar_fecha_minima">
+			Desde
+		</label>
+		<input class="form-control ml-2" value="{{request.GET.fecha_minima}}" type="date" name="fecha_minima" id="filtrar_fecha_minima" />
+	</div>
+	<div class="form-group mb-2 mr-sm-2">
+		<label for="filtrar_realizado">
+			Hasta
+		</label>
+		<input class="form-control ml-2" value="{{request.GET.fecha_maxima}}" type="date" name="fecha_maxima" id="filtrar_fecha_maxima" />
+	</div>
+	<div class="form-group mb-2 mr-sm-2">
+		<label for="filtrar_realizado">
+			Tipo de evento
+		</label>
+		<select class="form-control ml-2" name="tipo" id="tipo">
+			<option selected>Todos</option>
+			<option value="PRESENCIAL">Presencial</option>
+			<option value="VIRTUAL">Virtual</option>
+		</select>
+	</div>
+	<div class="form-check form-check-inline mb-2 mr-sm-2">
+		<input class="form-check-input" {% if request.GET.cancelado %}checked="checked"{% endif %} type="checkbox" name="cancelado" value="1" id="filtrar_cancelado" />
+		<label class="form-check-label" for="filtrar_cancelado">
+			Cancelado
+		</label>
+	</div>
+	<button type="submit" class="btn btn-primary mb-2">Generar reporte</button>
+</form>
+
+{% endblock %}

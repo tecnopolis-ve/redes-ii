@@ -1,0 +1,91 @@
+
+{% extends "../layouts/light.html" %} 
+{% load filters %}
+
+{% block lightcontent %}
+
+<div class="col-10">
+    <div class="container">
+        <h1 class="h3 mb-5">Registrar una cuenta</h1>
+
+        <form class="container" method="post" enctype="multipart/form-data" novalidate="novalidate">
+            {% csrf_token %}
+            <div class="form-group row">
+                {{ form.nombre | label_class:"col-form-label col-sm-2" }}
+                <div class="col-sm-5">
+                    {{ form.nombre | add_class:"form-control" }}
+                    {{ form.nombre.errors }}
+                </div>
+            </div>
+            <div class="form-group row">
+                {{ form.apellido | label_class:"col-form-label col-sm-2" }}
+                <div class="col-sm-5">
+                    {{ form.apellido | add_class:"form-control" }}
+                    {{ form.apellido.errors }}
+                </div>
+            </div>
+            <div class="form-group row">
+                {{ form.fecha_nac | label_class:"col-form-label col-sm-2" }}
+                <div class="col-sm-5">
+                    {{ form.fecha_nac | add_class:"form-control" }}
+                    {{ form.fecha_nac.errors }}
+                </div>
+            </div>
+            <div class="form-group row">
+                {{ form.nacionalidad | label_class:"col-form-label col-sm-2" }}
+                <div class="col-sm-5">
+                    {{ form.nacionalidad | add_class:"form-control" }}
+                    {{ form.nacionalidad.errors }}
+                </div>
+            </div>
+            <div class="form-group row">
+                {{ form.vive | label_class:"col-form-label col-sm-2" }}
+                <div class="col-sm-5">
+                    {{ form.vive | add_class:"form-control" }}
+                    {{ form.vive.errors }}
+                </div>
+            </div>
+            <div class="form-group row">
+                {{ form.telefono | label_class:"col-form-label col-sm-2" }}
+                <div class="col-sm-5">
+                    {{ form.telefono | add_class:"form-control" }}
+                    {{ form.telefono.errors }}
+                </div>
+            </div>
+            <div class="form-group row">
+                {{ form.email | label_class:"col-form-label col-sm-2" }}
+                <div class="col-sm-10">
+                    {{ form.email | add_class:"form-control" }}
+                    {{ form.email.errors }}
+                </div>
+            </div>
+            <div class="form-group row">
+                {{ form.password1 | label_class:"col-form-label col-sm-2" }}
+                <div class="col-sm-5">
+                    {{ form.password1 | add_class:"form-control" }}
+                    {{ form.password1.errors }}
+                </div>
+            </div>
+            <div class="form-group row">
+                {{ form.password2 | label_class:"col-form-label col-sm-2" }}
+                <div class="col-sm-5">
+                    {{ form.password2 | add_class:"form-control" }}
+                    {{ form.password2.errors }}
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-sm-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Registrarse</button>
+                    <a href="/accounts/login" class="btn btn-link">Iniciar sesión</a>
+                </div>
+            </div>
+        </form>
+
+        <div class="mt-2 offset-sm-2 col-sm-10">
+            <ul class="list-unstyled">
+                <li><a href="/">Volver al inicio</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

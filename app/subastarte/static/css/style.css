@@ -1,0 +1,21 @@
+.headless-container{
+    margin-top: 150px;
+}
+
+.jumbotron-image {
+    background-position: center center;
+    background-repeat: no-repeat;
+    min-height: 350px;
+  }
+  
+.badge-headed {
+    font-size: 12px;
+    font-weight: 700;
+    vertical-align:top;
+}
+
+.card-img-top{
+    width: 100%;
+    height: 20vh;
+    object-fit: cover;
+}

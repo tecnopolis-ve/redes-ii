@@ -1,0 +1,32 @@
+{% extends "../layouts/light.html" %} 
+{% load filters %}
+
+{% block lightcontent %}
+
+<div class="col-5">
+    <div class="container">
+        <h1 class="h3 mb-5">Iniciar sesión</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group row">
+                {{ form.username.label_tag }}
+                {{ form.username | add_class:"form-control" }}
+                {{ form.username.errors }}
+            </div>
+            <div class="form-group row">
+                {{ form.password.label_tag }}
+                {{ form.password | add_class:"form-control" }}
+                {{ form.password.errors }}
+            </div>
+            <div class="form-group row">
+                <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                <a href="/registro" class="btn btn-link">Registrarse</a>
+            </div>
+        </form>
+    
+        <ul class="mt-2 list-unstyled">
+            <li><a href="/">Volver al inicio</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

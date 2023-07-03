@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Eventos</title>
+    <style>
+      @font-face {
+        font-family: 'source_sans';
+        src: url({#asset /subastARTE/reportes/source_sans.woff2 @encoding=dataURI});
+        format('woff2');
+      }
+      html {
+        font-size: 10px;
+        font-family: 'source_sans';
+        margin: 2cm 1cm;
+      }
+      #evento, #attrs {
+        border: 0.1mm #DEE2E6 solid;
+        width: 100%;
+        margin-top: 2cm;
+      }
+      #evento thead, #attrs thead {
+        text-align: left;
+      }
+      #evento th, #evento td, #attrs th, #attrs td {
+        padding: 2mm;
+      }
+      h1{
+        text-align: center;
+      }
+      #evento tr:nth-child(odd) {
+				background-color: #F2F2F2;
+			}
+    </style>
+  </head>
+  <body>
+    <h1>Informe de resultados de Eventos</h1>
+
+    <table id="attrs">
+      <tbody>
+        <tr>
+           <td><strong>Desde:</strong> {{fecha_desde}}</td>
+           <td><strong>Hasta:</strong> {{fecha_hasta}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    {{#if eventos}}
+
+      <table id="evento">
+        <thead>
+          <th>ID</th>
+          <th>Tipo</th>
+          <th>Nombre</th>
+          <th>Lugar</th>
+          <th>Fecha</th>
+          <th>Duración</th>
+          <th>Estado</th>
+          <th>Costo gral.</th>
+          <th>Costo cliente</th>
+          <th>Participantes</th>
+          <th>Total art.</th>
+          <th>Art. vendidos</th>
+        </thead>
+        <tbody>
+          {{#each eventos}}
+          <tr>
+            <td>
+              {{this.id}}
+            </td>
+            <td>
+              {{this.tipo}}
+            </td>
+            <td>
+              {{this.nombre}}
+            </td>
+            <td>
+              {{this.lugar_subasta}}
+            </td>
+            <td>
+              {{this.fecha_evento}}
+            </td>
+            <td>
+              {{this.horas}}
+            </td>
+            <td>
+              {{#if this.cancelado}}
+                CANCELADO
+              {{else}}
+                Según planificado
+              {{/if}}
+            </td>
+            <td>
+              ${{this.costo_ins_general}}
+            </td>
+            <td>
+              ${{this.costo_ins_client}}
+            </td>
+            <td>
+              {{this.total_participantes}}
+            </td>
+            <td>
+              {{this.total_objetos}}
+            </td>
+            <td>
+              {{this.total_objetos_vendidos}}
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+      <p style="margin-top: 1cm">No hay resultados.</p>
+    {{/if}}
+</body>
+</html>

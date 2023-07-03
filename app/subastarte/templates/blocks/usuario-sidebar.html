@@ -1,0 +1,30 @@
+<nav class="sidebar active">
+    <div class="sidebar-content">
+        <a class="sidebar-brand" href="{% url 'usuario:index' %}">Perfil de usuario</a>
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Contenido</span>
+        </h6>
+        <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'usuario:articulos:index' %}"><i class="far fa-fw fa-palette"></i> Artículos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'usuario:eventos:index' %}"><i class="far fa-fw fa-calendar-alt"></i> Eventos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'usuario:facturas:index' %}"><i class="far fa-fw fa-file-invoice"></i> Facturas</a>
+            </li>
+        </ul>
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Configuración</span>
+        </h6>
+        <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'usuario:detail' %}"><i class="far fa-fw fa-user"></i> Perfil</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+{% block sidebar %}
+{% endblock %}

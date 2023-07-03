@@ -1,0 +1,42 @@
+
+{% extends "layouts/tienda.html" %} 
+
+{% block subnav %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h3">Artistas</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <a class="float-right btn btn-sm btn-outline-primary" href="{% url 'tienda:artistas:new' %}">Agregar nuevo</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+
+<table id="artistas" class="table table-striped table-bordered dataTable no-footer" style="width:100%">
+    <thead>
+        <tr>
+            <th>Nombre artístico</th>
+            <th>Nombre</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for artista in data %}
+            <tr>
+                <td>{{ artista.nombre_artistico }}</td>
+                <td>{{ artista.nombre_completo }}</td>
+                <td>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="{% url 'tienda:artistas:detail' artista.pk %}">Ver</a></li>
+                        <li class="list-inline-item"><a href="{% url 'tienda:artistas:edit' artista.pk %}">Editar</a></li>
+                        <li class="list-inline-item"><a class="text-danger" href="{% url 'tienda:artistas:delete' artista.pk %}" onclick="if (confirm('\u00bfDesea eliminar el registro?')) { return true; } return false;">Borrar</a></li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

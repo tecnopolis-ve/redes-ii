@@ -1,0 +1,86 @@
+{% extends "layouts/usuario.html" %} 
+
+{% block subnav %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h3">Artículos</h1>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="monedas-tab" data-toggle="tab" href="#monedas" role="tab" aria-controls="monedas" aria-selected="true"><i class="far fa-fw fa-coins"></i> Monedas</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pinturas-tab" data-toggle="tab" href="#pinturas" role="tab" aria-controls="pinturas" aria-selected="false"><i class="far fa-fw fa-images"></i> Pinturas</a>
+    </li>
+</ul>
+
+<div class="tab-content pt-5" id="myTabContent">
+    <div class="tab-pane fade active show" id="monedas" role="tabpanel" aria-labelledby="eventos-tab">
+        <table id="monedas_data" class="table table-striped table-bordered dataTable no-footer" style="width:100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>NUR</th>
+                    <th>Nombre</th>
+                    <th>Precio de salida</th>
+                    <th>Precio de compra</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for elem in monedas %}
+                    <tr>
+                        <td>{% if elem.moneda.imagen_thumb %}<img src="{{ elem.moneda.imagen_thumb.url }}" alt="" width="100" />{% endif %}</td>
+                        <td>{{ elem.moneda.nur }}</td>
+                        <td>{{ elem.moneda.nombre }}</td>
+                        <td>{{ elem.ask_display }}</td>
+                        <td>{{ elem.bid_display }}</td>
+                        <td>
+                            <ul class="list-inline">
+                                <li class="list-inline-item"><a href="{% url 'usuario:articulos:detail' elem.pk %}"><i class="far fa-file-certificate"></i> Certificado</a></li>
+                                <li class="list-inline-item"><a target="_blank" href="{% url 'public:articulos:detail' 'moneda' elem.moneda.nur %}">Ver ficha <i class="far fa-fw fa-external-link-alt"></i></a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-pane fade" id="pinturas" role="tabpanel" aria-labelledby="eventos-tab">
+        <table id="pinturas_data" class="table table-striped table-bordered dataTable no-footer" style="width:100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>NUR</th>
+                    <th>Título</th>
+                    <th>Precio de salida</th>
+                    <th>Precio de compra</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for elem in pinturas %}
+                    <tr>
+                        <td>{% if elem.pintura.imagen_thumb %}<img src="{{ elem.pintura.imagen_thumb.url }}" alt="" width="100" />{% endif %}</td>
+                        <td>{{ elem.pintura.nur }}</td>
+                        <td>{{ elem.pintura.titulo }}</td>
+                        <td>{{ elem.ask_display }}</td>
+                        <td>{{ elem.bid_display }}</td>
+                        <td>
+                            <ul class="list-inline">
+                                <li class="list-inline-item"><a href="{% url 'usuario:articulos:detail' elem.pk %}"><i class="far fa-file-certificate"></i> Certificado</a></li>
+                                <li class="list-inline-item"><a target="_blank" href="{% url 'public:articulos:detail' 'pintura' elem.pintura.nur %}">Ver ficha <i class="far fa-fw fa-external-link-alt"></i></a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "layouts/admin.html" %} 
+
+{% block subnav %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h3">Usuario <small>Ver detalles</small></h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <a class="float-right btn btn-sm btn-outline-primary" href="{% url 'staff:users:edit' user.pk %}">Editar</a>
+                <a class="float-right btn btn-sm btn-outline-primary mr-1" href="{% url 'staff:users:list' %}">Volver</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm">
+            <h5>Información de usuario</h5>
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <td><strong>ID</strong></td>
+                        <td>{{ user.pk }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>e-mail</strong></td>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Superusuario</strong></td>
+                        <td>{{ user.is_superuser }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Activo</strong></td>
+                        <td>{{ user.is_active }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

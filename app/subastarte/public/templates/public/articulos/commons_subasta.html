@@ -1,0 +1,86 @@
+{% load filters %}
+
+{% if evento and objeto_subasta_evento %}
+    <div class="row mb-3">
+        <div class="container">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td><strong>Tipo de puja</strong></td>
+                        <td>{{ objeto_subasta_evento.get_tipo_puja_display }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Precio de salida</strong></td>
+                        <td>{{ objeto_subasta_evento.ask_display }}</td>
+                    </tr>
+                    {% if objeto_subasta_evento.bid %}
+                        <tr>
+                            <td><strong>Precio más alto</strong></td>
+                            <td>{{ objeto_subasta_evento.bid_display }}</td>
+                        </tr>
+                    {% endif  %}
+                    {% if evento.tipo == 'VIRTUAL' %}
+                        <tr>
+                            <td><strong>Tiempo en subasta</strong></td>
+                            <td>{{ objeto_subasta_evento.duracion_minima }} minuto(s)</td>
+                        </tr>
+                    {% endif  %}
+                    <tr>
+                        <td><strong>Evento</strong></td>
+                        <td><strong><a href="{% url 'public:subastas:detail' evento.pk %}">{{ evento.nombre }}</a></strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ofertante</strong></td>
+                        <td><a href="{% url 'public:organizadores:detail' objeto_subasta_evento.tienda.pk %}">{{ objeto_subasta_evento.tienda.nombre }}</a></td>
+                    </tr>
+                    {% if evento.tipo == 'VIRTUAL' %}
+                        <tr>
+                            <td style="width: 30%"><strong>Ámbito de ofertas</strong></td>
+                            <td>
+                                <p>{{ objeto_subasta_evento.tienda.get_alcance_display }}</p>
+                                {% if objeto_subasta_evento.tienda.alcance == 'LOCAL' %}
+                                    <div class="alert alert-primary" role="alert">Este producto solo está disponible para participantes residenciados en <strong>{{ objeto_subasta_evento.tienda.pais }}</strong>.</div>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row mb-5 text-center">
+        <div class="col-sm">
+            <div class="jumbotron">
+                {% if participante %}
+                    {% if item_admite_ofertas %}
+                        {% if evento.estado == 'EN CURSO' %}
+                            <form method="post" novalidate="novalidate">
+                                {% csrf_token %}
+                                {% for hidden in form.hidden_fields %}
+                                    {{ hidden }}
+                                {% endfor %}
+                                <div class="form-row justify-content-center">
+                                    <div class="col-auto">
+                                        {{ form.bid | add_class:"form-control mb-2" }}
+                                        {{ form.bid.errors }}
+                                        <small class="form-text text-muted" style="text-align: left;">Realiza una oferta por {% if objeto_subasta_evento.bid %}{{ objeto_subasta_evento.next_bid_display }}{% else %}{{ objeto_subasta_evento.ask_display }}{% endif %} o más para participar.</small>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="submit" class="btn btn-primary mb-2">Realizar una oferta</button>
+                                    </div>
+                                </div>
+                            </form>
+                        {% elif evento.estado == 'PENDIENTE' %}
+                            <h3>Este evento aún no ha comenzado.</h3>
+                        {% endif %}
+                    {% else %}
+                        <h3>La subasta de este artículo ha finalizado.</h3>
+                        <h3><a href="{% url 'public:articulos:list_subasta' evento.pk %}">Ver otros artículos en subasta.</a></h3>
+                    {% endif %}
+                {% else %}
+                    <h3>No participas en este evento.</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}

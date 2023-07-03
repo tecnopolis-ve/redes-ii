@@ -1,0 +1,50 @@
+{% extends "layouts/admin.html" %} 
+
+{% block subnav %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h3">Tiendas</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <a class="float-right btn btn-sm btn-outline-primary mr-1" href="{% url 'staff:tiendas:new' %}">Agregar nuevo</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+
+<table id="tiendas" class="table table-striped table-bordered dataTable no-footer" style="width:100%">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Propósito</th>
+            <th>País</th>
+            <th>Alcance</th>
+            <th>Fecha&nbsp;de&nbsp;fundación</th>
+            <th>Últ.&nbsp;Modificación</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tienda in data %}
+            <tr>
+                <td>{{ tienda.nombre }}</td>
+                <td>{{ tienda.proposito|truncatechars:256 }}</td>
+                <td>{{ tienda.pais }}</td>
+                <td>{{ tienda.get_alcance_display }}</td>
+                <td>{{ tienda.fundacion|date:'d-m-Y' }}</td>
+                <td>{{ tienda.modified }}</td>
+                <td>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="{% url 'staff:tiendas:contactos' tienda.pk %}">Contactos</a></li>
+                        <li class="list-inline-item"><a href="{% url 'staff:tiendas:detail' tienda.pk %}">Ver</a></li>
+                        <li class="list-inline-item"><a href="{% url 'staff:tiendas:edit' tienda.pk %}">Editar</a></li>
+                        <li class="list-inline-item"><a class="text-danger" href="{% url 'staff:tiendas:delete' tienda.pk %}" onclick="if (confirm('\u00bfDesea eliminar el registro?')) { return true; } return false;">Borrar</a></li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "layouts/public.html" %} 
+
+{% block nav %}
+
+{% endblock %}
+
+{% block body %}
+
+<div class="container mb-5" >
+    {% if data %}
+        <div class="row row-cols-1 row-cols-md-3">
+        {% for item in data %}
+            <div class="col mb-4">
+                <div class="card h-100">
+                    {% if item.imagen_thumb %}
+                        <img class="card-img-top" src="{{ item.imagen_thumb.url }}" alt="" />
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'public:subastas:detail' item.pk %}">{{ item.nombre }}</a> {% if item.estado == 'EN CURSO' %}<span class="badge badge-info badge-headed">{{ item.estado }}</span>{% endif %}</h5>
+                        <p class="card-text"><strong>Fecha:</strong> {{ item.fecha }} <span class="muted">({{ item.horas }} horas)</span></p>
+                        <p class="card-text"><strong>Modalidad:</strong> <span class="muted">{{ item.get_tipo_display }}</span></p>
+                        <p class="card-text"><strong>Costo general:</strong> <span class="muted">{{ item.costo_ins_general_display }}</span></p>
+                        <p class="card-text"><strong>Costo cliente:</strong> <span class="muted">{{ item.costo_ins_client_display }}</span></p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    {% else %}
+        <p>Nada que mostrar.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

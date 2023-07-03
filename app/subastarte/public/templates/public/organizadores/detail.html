@@ -1,0 +1,84 @@
+{% extends "layouts/public.html" %} 
+
+{% block nav %}
+
+{% endblock %}
+
+{% block body %}
+<div class="container mb-5">
+    <h1>{{ tienda.nombre }}</h1>
+    <h5>Fundada el {{ tienda.fundacion|date:'d-m-Y' }}</h5>
+    <i>{{ tienda.proposito|linebreaks|truncatechars:1024 }}</i>
+
+    <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="eventos-tab" data-toggle="tab" href="#eventos" role="tab" aria-controls="eventos" aria-selected="true"><i class="far fa-fw fa-calendar-alt"></i> Eventos organizados</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tienda-tab" data-toggle="tab" href="#tienda" role="tab" aria-controls="tienda" aria-selected="false"><i class="far fa-fw fa-info-circle"></i> Información</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'public:articulos:list_tienda' tienda.pk %}"><span class="text-primary"><i class="far fa-box-heart"></i> Ver catálogo</span></a>
+          </li>
+    </ul>
+
+    <div class="tab-content pt-5" id="myTabContent">
+        <div class="tab-pane fade active show" id="eventos" role="tabpanel" aria-labelledby="eventos-tab">
+            {% if data %}
+                <div class="row row-cols-1 row-cols-md-3">
+                {% for item in data %}
+                    <div class="col mb-4">
+                        <div class="card h-100">
+                            {% if item.evento.imagen_thumb %}
+                                <img class="card-img-top" src="{{ item.evento.imagen_thumb.url }}" alt="" />
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="{% url 'public:subastas:detail' item.evento.pk %}">{{ item.evento.nombre }}</a></h5>
+                                <p class="card-text"><strong>Fecha:</strong> {{ item.evento.fecha }} <span class="muted">({{ item.evento.horas }} horas)</span></p>
+                                <p class="card-text"><strong>Modalidad:</strong> <span class="muted">{{ item.evento.get_tipo_display }}</span></p>
+                                <p class="card-text"><strong>Costo general:</strong> <span class="muted">{{ item.evento.costo_ins_general_display }}</span></p>
+                                <p class="card-text"><strong>Costo cliente:</strong> <span class="muted">{{ item.evento.costo_ins_client_display }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            {% else %}
+                <p>Nada que mostrar.</p>
+            {% endif %}
+        </div>        
+        <div class="tab-pane fade" id="tienda" role="tabpanel" aria-labelledby="tienda-tab">
+            <div class="row mb-5">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><strong>Website</strong></td>
+                            <td>{{ tienda.website }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email</strong></td>
+                            <td>{{ tienda.email }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Teléfono</strong></td>
+                            <td>{{ tienda.telefono }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Alcance</strong></td>
+                            <td>{{ tienda.get_alcance_display }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>País</strong></td>
+                            <td>{{ tienda.pais }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>En subastARTE desde</strong></td>
+                            <td>{{ tienda.created|date:'d-m-Y' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

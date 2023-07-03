@@ -1,0 +1,45 @@
+
+{% extends "layouts/tienda.html" %} 
+
+{% block subnav %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h3">Clientes</h1>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+
+<table id="clients" class="table table-striped table-bordered dataTable no-footer" style="width:100%">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre completo</th>
+            <th>Fecha de nacimiento</th>
+            <th>Teléfono</th>
+            <th>Nacionalidad</th>
+            <th>Vive</th>
+            <th>Fecha de registro</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for client in data %}
+            <tr>
+                <td>{{ client.num_exp_unico }}</td>
+                <td>{{ client.coleccionista.nombre_completo }}</td>
+                <td>{{ client.coleccionista.fecha_nac|date:'d-m-Y' }}</td>
+                <td>{{ client.coleccionista.telefono }}</td>
+                <td>{{ client.coleccionista.nacionalidad }}</td>
+                <td>{{ client.coleccionista.vive }}</td>
+                <td>{{ client.created }}</td>
+                <td>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="{% url 'tienda:clientes:detail' user.pk %}">Detalles</a></li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

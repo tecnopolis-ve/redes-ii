@@ -1,0 +1,72 @@
+{% extends "layouts/public.html" %} 
+
+{% block nav %}
+
+{% endblock %}
+
+{% block body %}
+
+<div class="jumbotron jumbotron-fluid jumbotron-image" style="background-image: url({{ articulo.imagen.url }});">
+    <div class="container"></div>
+  </div>
+
+<div class="container mb-5" >
+    <div class="row mb-5">
+        <div class="col-sm">
+            <h1>{{ articulo.titulo }}</h1>
+            {% if articulo.titulo_original %}
+                <h4><i>{{ articulo.titulo_original }}</i></h4>
+            {% endif %}
+        </div>
+    </div>
+    {% include './commons_subasta.html' %}
+    <div class="row">
+        <div class="col-sm">
+            <h5>Información de la obra</h5>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td><strong>NUR</strong></td>
+                        <td>{{ articulo.nur }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Estilo</strong></td>
+                        <td>{{ articulo.estilo }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Año</strong></td>
+                        <td>{{ articulo.anyo }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dimensiones</strong></td>
+                        <td>{{ articulo.dimensiones }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm">
+            <h5>Información del artista</h5>
+            {% if artistas %}
+                <table class="table">
+                    <tbody>
+                    {% for artista in artistas %}
+                        {% if artista.artista.nombre_artistico %}
+                            <tr>
+                                <td><strong>Nombre artístico</strong></td>
+                                <td>{{ artista.artista.nombre_artistico }}</td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <td><strong>Nombre real</strong></td>
+                            <td>{{ artista.artista.apellido }}, {{ artista.artista.nombre }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No disponible.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

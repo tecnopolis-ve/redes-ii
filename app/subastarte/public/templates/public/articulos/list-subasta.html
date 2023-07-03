@@ -1,0 +1,152 @@
+{% extends "layouts/public.html" %} 
+
+{% block nav %}
+
+{% endblock %}
+
+{% block body %}
+
+<div class="pl-5 pr-5 mb-5 border-bottom box-shadow">
+    <div class="container">
+        <form class="form-inline">
+            <div class="form-check mb-2 mr-sm-2">
+                <input class="form-check-input" {% if request.GET.pintura %}checked="checked"{% endif %} type="checkbox" name="pintura" value="1" id="filtrar_pintura" />
+                <label class="form-check-label" for="filtrar_pintura">
+                    Pinturas
+                </label>
+            </div>
+            <div class="form-check mb-2 mr-sm-2">
+                <input class="form-check-input" {% if request.GET.moneda %}checked="checked"{% endif %} type="checkbox" name="moneda" value="1" id="filtrar_moneda" />
+                <label class="form-check-label" for="filtrar_moneda">
+                    Monedas
+                </label>
+            </div>
+            <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="far fa-dollar-sign"></i></div>
+                </div>
+                <input autocomplete="off" type="number" value="{{ request.GET.precio_minimo }}" class="form-control" name="precio_minimo" placeholder="Min." />
+            </div>
+            <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="far fa-dollar-sign"></i></div>
+                </div>
+                <input autocomplete="off" type="number" value="{{ request.GET.precio_maximo }}" class="form-control" name="precio_maximo" placeholder="Max." />
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Filtrar</button>
+        </form>
+    </div>
+</div>
+<div class="container mb-5" >
+    <div class="row mb-4">
+        <div class="container">
+            <h1><a href="{% url 'public:subastas:detail' evento.pk %}">{{ item.nombre }}{% if evento.cancelado %}<del>{{ evento.nombre }}</del>{% else %}{{ evento.nombre }}{% endif %}</a> {% if not evento.cancelado %}<span class="badge badge-info badge-headed">{{ evento.estado }}</span>{% endif %}</h1>
+            <h3>{% if evento.cancelado %}<del>{{ evento.fecha }}</del>{% else %}{{ evento.fecha }}{% endif %}</h3>
+            {% if evento.cancelado %}
+                <h5 class="text-danger">Este evento ha sido cancelado.</h5>
+            {% else %}
+                {% if participante and evento_activo %}
+                    <h5 class="text-success">Estás inscrito en este evento.</h5>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    {% if data %}
+        <div class="row row-cols-1 row-cols-md-3 mb-4">
+            {% for item in data %}
+                <div class="col mb-4">
+                    <div class="card h-100">
+                        {% if item.moneda %}
+                            {% if item.moneda.imagen_thumb %}
+                                <img class="card-img-top" src="{{ item.moneda.imagen_thumb.url }}" alt="" />
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="{% url 'public:articulos:detail_subasta' 'moneda' item.moneda.pk item.evento.pk %}">{{ item.moneda.nombre }}</a></h5>
+                                <p class="card-text"><strong>Tipo:</strong> moneda</p>
+                                <p class="card-text"><strong>Motivo:</strong> {{ item.moneda.motivo }}</p>
+                                <p class="card-text"><strong>Precio de salida:</strong> {{ item.ask_display }}</p>
+                                <p class="card-text">
+                                    <small class="text-muted">NUR: {{ item.moneda.nur }}</small><br/>
+                                    <small class="text-muted">Orden #: {{ item.orden }}</small>
+                                </p>
+                            </div>
+                        {% else %}
+                            {% if item.pintura.imagen_thumb %}
+                                <img class="card-img-top" src="{{ item.pintura.imagen_thumb.url }}" alt="" />
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="{% url 'public:articulos:detail_subasta' 'pintura' item.pintura.pk item.evento.pk %}">{{ item.pintura.titulo }}</a></h5>
+                                {% if item.pintura.titulo_original %}
+                                    <p class="card-text"><strong>Título original:</strong> {{ item.pintura.titulo_original }}</p>
+                                {% endif %}
+                                <p class="card-text"><strong>Tipo:</strong> pintura</p>
+                                <p class="card-text"><strong>Precio de salida:</strong> {{ item.ask_display }}</p>
+                                <p class="card-text">
+                                    <small class="text-muted">NUR: {{ item.pintura.nur }}</small><br/>
+                                    <small class="text-muted">Orden #: {{ item.orden }}</small>
+                                </p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="container">
+                <ul class="pagination justify-content-center">
+                    {% if data.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ data.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">
+                                Anterior
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">
+                                Anterior
+                            </a>
+                        </li>
+                    {% endif %}
+                    
+                    {% if data.number|add:'-4' > 1 %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ data.number|add:'-5' }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">&hellip;</a>
+                        </li>
+                    {% endif %}
+                    
+                    {% for i in data.paginator.page_range %}
+                        {% if data.number == i %}
+                            <li class="page-item active">
+                                <a class="page-link">{{ i }}</a>
+                            </li>
+                        {% elif i > data.number|add:'-5' and i < data.number|add:'5' %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ i }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ i }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if data.paginator.num_pages > data.number|add:'4' %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ data.number|add:'5' }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">&hellip;</a>
+                        </li>
+                    {% endif %}
+                    
+                    {% if data.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ data.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Siguiente</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">Siguiente</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    {% else %}
+        <p>Nada que mostrar.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

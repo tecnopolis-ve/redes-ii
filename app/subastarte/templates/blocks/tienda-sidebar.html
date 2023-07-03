@@ -1,0 +1,39 @@
+<nav class="sidebar active">
+    <div class="sidebar-content">
+        <a class="sidebar-brand" href="{% url 'tienda:index' %}">Gestión de tienda</a>
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Contenido</span>
+        </h6>
+        <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'tienda:artistas:list' %}"><i class="far fa-fw fa-palette"></i> Artistas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'tienda:articulos:pinturas' %}"><i class="far fa-fw fa-images"></i> Pinturas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'tienda:articulos:monedas' %}"><i class="far fa-fw fa-coins"></i> Monedas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'tienda:eventos:list' %}"><i class="far fa-fw fa-calendar-alt"></i> Eventos</a>
+            </li>
+        </ul>
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Configuración</span>
+        </h6>
+        <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'tienda:detail' %}"><i class="far fa-fw fa-store"></i> Tienda</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'tienda:clientes:list' %}"><i class="far fa-fw fa-users"></i> Clientes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'tienda:perfil:detail' %}"><i class="far fa-fw fa-user"></i> Perfil</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+{% block sidebar %}
+{% endblock %}

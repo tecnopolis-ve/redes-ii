@@ -1,0 +1,117 @@
+
+{% extends "layouts/tienda.html" %} 
+
+{% block subnav %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h3">Moneda <small>Ver detalle</small></h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <a class="float-right btn btn-sm btn-outline-primary" href="{% url 'tienda:articulos:moneda_edit' moneda.nur %}">Editar</a>
+                <a class="float-right btn btn-sm btn-outline-primary mr-1" href="{% url 'tienda:articulos:monedas' %}">Volver</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm">
+            <h5>Información de la moneda</h5>
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <td><strong>NUR</strong></td>
+                        <td>{{ moneda.nur }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nombre</strong></td>
+                        <td>{{ moneda.nombre }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Divisa</strong></td>
+                        <td>{{ moneda.divisa }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Denominación</strong></td>
+                        <td>{{ moneda.denominacion }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Forma</strong></td>
+                        <td>{{ moneda.get_forma_display }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Metal</strong></td>
+                        <td>{{ moneda.get_metal_display }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Canto</strong></td>
+                        <td>{{ moneda.get_canto_display }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Diámetro</strong></td>
+                        <td>{{ moneda.diametro }} mm</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Peso</strong></td>
+                        <td>{{ moneda.peso }} g</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Año de emisión</strong></td>
+                        <td>{{ moneda.anyo_emision }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Acuñación</strong></td>
+                        <td>{{ moneda.org_acunyacion }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>País de acuñación</strong></td>
+                        <td>{{ moneda.pais_acunyacion }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Motivo</strong></td>
+                        <td>{{ moneda.motivo }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Anverso</strong></td>
+                        <td>{{ moneda.anverso }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reverso</strong></td>
+                        <td>{{ moneda.reverso }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mintage</strong></td>
+                        <td>{{ moneda.total_mintage }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm">
+            <h5>Información del artista</h5>
+            {% if artistas %}
+                <table class="table table-hover">
+                    <tbody>
+                    {% for artista in artistas %}
+                        {% if artista.artista.nombre_artistico%}
+                            <tr>
+                                <td><strong>Nombre artístico</strong></td>
+                                <td>{{ artista.artista.nombre_artistico }}</td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <td><strong>Nombre real</strong></td>
+                            <td>{{ artista.artista.apellido }}, {{ artista.artista.nombre }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No disponible.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

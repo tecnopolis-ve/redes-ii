@@ -1,0 +1,28 @@
+{% load static %}
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/carousel.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/all.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/regular.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/datatables.min.css' %}">
+        {% block static_css %}
+        {% endblock %}
+        <title>..:: subastARTE ::..</title>
+    </head>
+    <body>
+        {% block content %}
+        {% endblock %}  
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>   
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ==" crossorigin="anonymous"></script>  
+        <script type="text/javascript" src="{% static 'js/datatables.min.js' %}"></script> 
+        {% block static_js %}
+        {% endblock %}
+        <script type="text/javascript" src="{% static 'js/app.js' %}"></script>   
+    </body>
+</html>

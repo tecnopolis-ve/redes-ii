@@ -1,0 +1,22 @@
+{
+    "name": "eventos.html",
+    "recipe": "chrome-pdf",
+    "shortid": "j9SYkc1bHY",
+    "engine": "handlebars",
+    "chrome": {
+        "printBackground": true
+    },
+    "creationDate": {
+        "$$date": 1628064689156
+    },
+    "modificationDate": {
+        "$$date": 1628074531683
+    },
+    "scripts": [
+        {
+            "shortid": "6ZwjO3Zxqo"
+        }
+    ],
+    "_id": "hXDdUF2qeHkZcdPu",
+    "$entitySet": "templates"
+}

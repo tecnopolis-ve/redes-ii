@@ -1,0 +1,68 @@
+
+{% extends "layouts/tienda.html" %} 
+
+{% block subnav %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h3">Cliente <small>Ver detalle</small></h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <a class="float-right btn btn-sm btn-outline-primary mr-1" href="{% url 'tienda:clientes:list' %}">Volver</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <td><strong># Expediente</strong></td>
+                        <td>{{ cliente.num_exp_unico }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fecha registro</strong></td>
+                        <td>{{ cliente.created }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nombre</strong></td>
+                        <td>{{ cliente.coleccionista.nombre }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Segundo nombre</strong></td>
+                        <td>{{ cliente.coleccionista.segundo_nombre }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Apellido</strong></td>
+                        <td>{{ cliente.coleccionista.apellido }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Segundo apellido</strong></td>
+                        <td>{{ cliente.coleccionista.segundo_apellido }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fecha de nacimiento</strong></td>
+                        <td>{{ cliente.coleccionista.fecha_nac|date:'d-m-Y' }} ({{ cliente.coleccionista.edad }} años)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Teléfono</strong></td>
+                        <td>{{ cliente.coleccionista.telefono }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nacionalidad</strong></td>
+                        <td>{{ cliente.coleccionista.nacionalidad }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vive</strong></td>
+                        <td>{{ cliente.coleccionista.vive }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
