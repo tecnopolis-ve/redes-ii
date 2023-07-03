@@ -25,7 +25,7 @@ DEBUG = int(os.environ.get("DEBUG", default=0))
 
 # 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a space between each.
 # For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]'
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -102,7 +102,7 @@ AUTH_USER_MODEL = "subastarte.User"
 
 LANGUAGE_CODE = 'es-es'
 
-TIME_ZONE = 'Europe/Madrid'
+TIME_ZONE = 'America/Caracas'
 
 USE_I18N = True
 
@@ -127,7 +127,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 # MISC
 
-DB_PREFIX = "msi_"
+DB_PREFIX = "redes2_"
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'info',
