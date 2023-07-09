@@ -37,11 +37,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "mathfilters",
-    "subastarte",
-    "subastarte.admin.apps.AdminConfig",
-    "subastarte.tienda.apps.TiendaConfig",
-    "subastarte.usuario.apps.UsuarioConfig",
-    "subastarte.public.apps.PublicConfig",
+    "subastas_redes",
+    "subastas_redes.admin.apps.AdminConfig",
+    "subastas_redes.tienda.apps.TiendaConfig",
+    "subastas_redes.usuario.apps.UsuarioConfig",
+    "subastas_redes.public.apps.PublicConfig",
 ]
 
 MIDDLEWARE = [
@@ -60,7 +60,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'subastarte/templates')
+            os.path.join(BASE_DIR, 'subastas_redes/templates')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -95,7 +95,7 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = []
 
-AUTH_USER_MODEL = "subastarte.User" 
+AUTH_USER_MODEL = "subastas_redes.User" 
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
