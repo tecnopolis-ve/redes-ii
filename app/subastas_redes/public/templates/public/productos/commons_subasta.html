@@ -75,7 +75,7 @@
                         {% endif %}
                     {% else %}
                         <h3>La subasta de este artículo ha finalizado.</h3>
-                        <h3><a href="{% url 'public:articulos:list_subasta' evento.pk %}">Ver otros artículos en subasta.</a></h3>
+                        <h3><a href="{% url 'public:productos:list_subasta' evento.pk %}">Ver otros artículos en subasta.</a></h3>
                     {% endif %}
                 {% else %}
                     <h3>No participas en este evento.</h3>

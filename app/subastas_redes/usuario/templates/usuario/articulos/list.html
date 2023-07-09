@@ -40,8 +40,8 @@
                         <td>{{ elem.bid_display }}</td>
                         <td>
                             <ul class="list-inline">
-                                <li class="list-inline-item"><a href="{% url 'usuario:articulos:detail' elem.pk %}"><i class="far fa-file-certificate"></i> Certificado</a></li>
-                                <li class="list-inline-item"><a target="_blank" href="{% url 'public:articulos:detail' 'moneda' elem.moneda.nur %}">Ver ficha <i class="far fa-fw fa-external-link-alt"></i></a></li>
+                                <li class="list-inline-item"><a href="{% url 'usuario:productos:detail' elem.pk %}"><i class="far fa-file-certificate"></i> Certificado</a></li>
+                                <li class="list-inline-item"><a target="_blank" href="{% url 'public:productos:detail' 'moneda' elem.moneda.nur %}">Ver ficha <i class="far fa-fw fa-external-link-alt"></i></a></li>
                             </ul>
                         </td>
                     </tr>
@@ -71,8 +71,8 @@
                         <td>{{ elem.bid_display }}</td>
                         <td>
                             <ul class="list-inline">
-                                <li class="list-inline-item"><a href="{% url 'usuario:articulos:detail' elem.pk %}"><i class="far fa-file-certificate"></i> Certificado</a></li>
-                                <li class="list-inline-item"><a target="_blank" href="{% url 'public:articulos:detail' 'pintura' elem.pintura.nur %}">Ver ficha <i class="far fa-fw fa-external-link-alt"></i></a></li>
+                                <li class="list-inline-item"><a href="{% url 'usuario:productos:detail' elem.pk %}"><i class="far fa-file-certificate"></i> Certificado</a></li>
+                                <li class="list-inline-item"><a target="_blank" href="{% url 'public:productos:detail' 'pintura' elem.pintura.nur %}">Ver ficha <i class="far fa-fw fa-external-link-alt"></i></a></li>
                             </ul>
                         </td>
                     </tr>

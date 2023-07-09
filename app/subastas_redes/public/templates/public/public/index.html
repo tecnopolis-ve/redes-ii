@@ -5,39 +5,6 @@
 
 {% block body %}
 
-    <div id="carrusel" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        {% for item in subastas %}
-          <li data-target="#carrusel" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.counter0 == 0 %}active{% endif %}"></li>
-        {% endfor %}
-      </ol>
-      <div class="carousel-inner">
-        {% for item in subastas %}
-          <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
-              {% if item.imagen_big %}
-                  <img class="first-slide" src="{{ item.imagen_big.url }}" alt="" />
-              {% endif %}
-              <div class="container">
-                  <div class="carousel-caption text-left">
-                      <h1>{{ item.nombre }}</h1>
-                      <p>Evento a celebrarse en {{ item.fecha }}</p>
-                      <p><a class="btn btn-lg btn-primary" href="{% url 'public:subastas:detail' item.pk %}" role="button">Ver evento</a></p>
-                  </div>
-              </div>
-          </div>
-        {% endfor %}
-      </div>
-      <a class="carousel-control-prev" href="#carrusel" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Anterior</span>
-      </a>
-      <a class="carousel-control-next" href="#carrusel" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Siguiente</span>
-      </a>
-    </div>
-
-
     <div class="container marketing">
 
       <!-- Three columns of text below the carousel -->
@@ -58,7 +25,7 @@
           <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
           <h2>Monedas y pinturas</h2>
           <p>Mira todas las monedas y pinturas.</p>
-          <p><a class="btn btn-secondary" href="{% url 'public:articulos:list' %}" role="button">Ver catálogo &raquo;</a></p>
+          <p><a class="btn btn-secondary" href="{% url 'public:productos:list' %}" role="button">Ver catálogo &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
 

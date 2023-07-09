@@ -39,27 +39,14 @@
             {% for item in data %}
                 <div class="col mb-4">
                     <div class="card h-100">
-                        {% if item.tipo == 'MONEDA' %}
-                            {% if item.imagen_thumb %}
-                                <img class="card-img-top" src="{{ item.imagen_thumb.url }}" alt="" />
-                            {% endif %}
-                            <div class="card-body">
-                                <h5 class="card-title"><a href="{% url 'public:articulos:detail' 'moneda' item.pk %}">{{ item.nombre }}</a></h5>
-                                <p class="card-text">{{ item.motivo }}</p>
-                                <p class="card-text"><small class="text-muted">NUR: {{ item.nur }}</small></p>
-                            </div>
-                        {% else %}
-                            {% if item.imagen_thumb %}
-                                <img class="card-img-top" src="{{ item.imagen_thumb.url }}" alt="" />
-                            {% endif %}
-                            <div class="card-body">
-                                <h5 class="card-title"><a href="{% url 'public:articulos:detail' 'pintura' item.pk %}">{{ item.titulo }}</a></h5>
-                                {% if item.titulo_original %}
-                                    <p class="card-text"><strong>Título original:</strong> {{ item.titulo_original }}</p>
-                                {% endif %}
-                                <p class="card-text"><small class="text-muted">NUR: {{ item.nur }}</small></p>
-                            </div>
+                        {% if item.imagen_thumb %}
+                            <img class="card-img-top" src="{{ item.imagen_thumb.url }}" alt="" />
                         {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{% url 'public:productos:detail' 'moneda' item.pk %}">{{ item.nombre }}</a></h5>
+                            <p class="card-text">{{ item.motivo }}</p>
+                            <p class="card-text"><small class="text-muted">NUR: {{ item.nur }}</small></p>
+                        </div>
                     </div>
                 </div>
             {% endfor %}

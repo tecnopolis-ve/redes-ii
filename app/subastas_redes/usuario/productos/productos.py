@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import user_passes_test, login_required
-from subastas_redes.models import ObjetoSubastaEvento
+from subastas_redes.models import Producto
 # from django.http import HttpResponse
 # from django.template.loader import render_to_string
 # from weasyprint import HTML
@@ -14,12 +14,9 @@ from django.http import HttpResponse
 @login_required
 @user_passes_test(lambda u:not (u.is_admin or u.is_superuser))
 def list(request):
-    objeto_subasta_evento = ObjetoSubastaEvento.objects.filter(ganador_id=request.user.pk)
-    monedas = objeto_subasta_evento.filter(moneda__isnull=False)
-    pinturas = objeto_subasta_evento.filter(pintura__isnull=False)
-    return render(request, "usuario/articulos/list.html", {
-        'monedas': monedas,
-        'pinturas': pinturas,
+    productos = Producto.objects.filter(ganador_id=request.user.pk)
+    return render(request, "usuario/productos/list.html", {
+        'productos': productos,
     })
 
 @login_required
@@ -45,7 +42,7 @@ def detail(request, ose_id):
 
     # evento = ObjetoSubastaEvento.objects.filter(ganador=request.user.pk, pk=articulo_id).prefetch_related('ganador').first()
 
-    # html_string = render_to_string('usuario/articulos/certificado.html', {'evento': evento})
+    # html_string = render_to_string('usuario/productos/certificado.html', {'evento': evento})
     # html = HTML(string=html_string)
     # result = html.write_pdf()
 

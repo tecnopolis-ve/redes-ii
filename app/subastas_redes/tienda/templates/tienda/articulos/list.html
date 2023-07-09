@@ -5,7 +5,7 @@
         <h1 class="h3">Pinturas</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
-                <a class="float-right btn btn-sm btn-outline-primary" href="{% url 'tienda:articulos:pintura_new' %}">Agregar nuevo</a>
+                <a class="float-right btn btn-sm btn-outline-primary" href="{% url 'tienda:productos:pintura_new' %}">Agregar nuevo</a>
             </div>
         </div>
     </div>
@@ -42,9 +42,9 @@
                 <td>{{ elem.modified }}</td>
                 <td>
                     <ul class="list-inline">
-                        <li class="list-inline-item"><a href="{% url 'tienda:articulos:pintura_detail' elem.nur %}">Ver</a></li>
-                        <li class="list-inline-item"><a href="{% url 'tienda:articulos:pintura_edit' elem.nur %}">Editar</a></li>
-                        <li class="list-inline-item"><a class="text-danger" href="{% url 'tienda:articulos:pintura_delete' elem.nur %}" onclick="if (confirm('\u00bfDesea eliminar el registro?')) { return true; } return false;">Borrar</a></li>
+                        <li class="list-inline-item"><a href="{% url 'tienda:productos:pintura_detail' elem.nur %}">Ver</a></li>
+                        <li class="list-inline-item"><a href="{% url 'tienda:productos:pintura_edit' elem.nur %}">Editar</a></li>
+                        <li class="list-inline-item"><a class="text-danger" href="{% url 'tienda:productos:pintura_delete' elem.nur %}" onclick="if (confirm('\u00bfDesea eliminar el registro?')) { return true; } return false;">Borrar</a></li>
                     </ul>
                 </td>
             </tr>

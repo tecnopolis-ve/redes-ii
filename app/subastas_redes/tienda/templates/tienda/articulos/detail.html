@@ -1,45 +1,49 @@
-{% extends "layouts/public.html" %} 
 
-{% block nav %}
+{% extends "layouts/tienda.html" %} 
 
-{% endblock %}
-
-{% block body %}
-
-<div class="jumbotron jumbotron-fluid jumbotron-image" style="background-image: url({{ articulo.imagen.url }});">
-    <div class="container"></div>
-  </div>
-
-<div class="container mb-5" >
-    <div class="row mb-5">
-        <div class="col-sm">
-            <h1>{{ articulo.titulo }}</h1>
-            {% if articulo.titulo_original %}
-                <h4><i>{{ articulo.titulo_original }}</i></h4>
-            {% endif %}
+{% block subnav %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h3">{{ pintura.titulo }} <small>{{ pintura.titulo_original }}</small></h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <a class="float-right btn btn-sm btn-outline-primary" href="{% url 'tienda:productos:pintura_edit' pintura.nur %}">Editar</a>
+                <a class="float-right btn btn-sm btn-outline-primary mr-1" href="{% url 'tienda:productos:pinturas' %}">Volver</a>
+            </div>
         </div>
     </div>
-    {% include './commons_subasta.html' %}
+{% endblock %}
+
+{% block subcontent %}
+
+<div class="container mt-5">
     <div class="row">
         <div class="col-sm">
-            <h5>Información de la obra</h5>
-            <table class="table">
+            <h5>Información de la pintura</h5>
+            <table class="table table-hover">
                 <tbody>
                     <tr>
                         <td><strong>NUR</strong></td>
-                        <td>{{ articulo.nur }}</td>
+                        <td>{{ pintura.nur }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Título</strong></td>
+                        <td>{{ pintura.titulo }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Título original</strong></td>
+                        <td>{{ pintura.titulo_original }}</td>
                     </tr>
                     <tr>
                         <td><strong>Estilo</strong></td>
-                        <td>{{ articulo.estilo }}</td>
+                        <td>{{ pintura.estilo }}</td>
                     </tr>
                     <tr>
                         <td><strong>Año</strong></td>
-                        <td>{{ articulo.anyo }}</td>
+                        <td>{{ pintura.anyo }}</td>
                     </tr>
                     <tr>
                         <td><strong>Dimensiones</strong></td>
-                        <td>{{ articulo.dimensiones }}</td>
+                        <td>{{ pintura.dimensiones }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -47,7 +51,7 @@
         <div class="col-sm">
             <h5>Información del artista</h5>
             {% if artistas %}
-                <table class="table">
+                <table class="table table-hover">
                     <tbody>
                     {% for artista in artistas %}
                         {% if artista.artista.nombre_artistico %}
@@ -69,4 +73,7 @@
         </div>
     </div>
 </div>
+
+
+
 {% endblock %}

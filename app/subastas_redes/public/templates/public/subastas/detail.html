@@ -114,7 +114,7 @@
     {% if objeto_subasta_evento %}
         <div class="row mt-5">
             <div class="col-sm">
-                <h4><a href="{% url 'public:articulos:list_subasta' evento.pk %}">Artículos en catálogo</a></h4>
+                <h4><a href="{% url 'public:productos:list_subasta' evento.pk %}">Artículos en catálogo</a></h4>
             </div>
         </div>
         <div class="row mt-5">
@@ -128,7 +128,7 @@
                                         <img class="card-img-top" src="{{ item.moneda.imagen_thumb.url }}" alt="" />
                                     {% endif %}
                                     <div class="card-body">
-                                        <h5 class="card-title"><a href="{% url 'public:articulos:detail_subasta' 'moneda' item.moneda.pk evento.pk %}">{{ item.moneda.nombre }}</a></h5>
+                                        <h5 class="card-title"><a href="{% url 'public:productos:detail_subasta' 'moneda' item.moneda.pk evento.pk %}">{{ item.moneda.nombre }}</a></h5>
                                         <p class="card-text">Tipo: moneda</p>
                                         <p class="card-text">Precio de salida: {{ item.ask_display }}</p>
                                         <p class="card-text">{{ item.moneda.motivo }}</p>
@@ -139,7 +139,7 @@
                                         <img class="card-img-top" src="{{ item.pintura.imagen_thumb.url }}" alt="" />
                                     {% endif %}
                                     <div class="card-body">
-                                        <h5 class="card-title"><a href="{% url 'public:articulos:detail_subasta' 'pintura' item.pintura.pk evento.pk %}">{{ item.pintura.titulo }}</a></h5>
+                                        <h5 class="card-title"><a href="{% url 'public:productos:detail_subasta' 'pintura' item.pintura.pk evento.pk %}">{{ item.pintura.titulo }}</a></h5>
                                         {% if item.pintura.titulo_original %}
                                             <p class="card-text"><i>{{ item.pintura.titulo_original }}</i></p>
                                         {% endif %}

@@ -130,7 +130,7 @@ class Cliente(BaseModel):
     cliente = models.ForeignKey(User, on_delete=models.CASCADE)
     tienda = models.ForeignKey(Tienda, on_delete=models.CASCADE)
     class Meta:
-        unique_together = ('coleccionista', 'tienda',)
+        unique_together = ('cliente', 'tienda',)
 
 class Divisa(BaseModel):
     pais = models.ForeignKey(Pais, on_delete=models.CASCADE)
