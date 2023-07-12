@@ -6,30 +6,10 @@
 
 {% block body %}
 
-<div class="pl-5 pr-5 mb-5 border-bottom box-shadow">
-    <div class="container">
-        <form class="form-inline">
-            <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-input" {% if request.GET.pintura %}checked="checked"{% endif %} type="checkbox" name="pintura" value="1" id="filtrar_pintura" />
-                <label class="form-check-label" for="filtrar_pintura">
-                    Pinturas
-                </label>
-            </div>
-            <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-input" {% if request.GET.moneda %}checked="checked"{% endif %} type="checkbox" name="moneda" value="1" id="filtrar_moneda" />
-                <label class="form-check-label" for="filtrar_moneda">
-                    Monedas
-                </label>
-            </div>
-            <button type="submit" class="btn btn-primary mb-2">Filtrar</button>
-        </form>
-    </div>
-</div>
 <div class="container mb-5" >
     {% if tienda %}
         <div class="row mb-4">
             <div class="container">
-                <h1><a href="{% url 'public:organizadores:detail' tienda.pk %}">{{ tienda.nombre }}</a></h1>
                 <h3>Catálogo</h3>
             </div>
         </div>

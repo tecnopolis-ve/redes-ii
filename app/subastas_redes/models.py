@@ -189,7 +189,6 @@ class Puja(BaseModel):
 
 class Factura(BaseModel):
     numero = models.AutoField(primary_key=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     cliente = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha = models.DateField()
     total_monto = models.FloatField()

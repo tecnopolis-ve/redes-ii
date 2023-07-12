@@ -25,14 +25,6 @@
                             <td>{{ objeto_subasta_evento.duracion_minima }} minuto(s)</td>
                         </tr>
                     {% endif  %}
-                    <tr>
-                        <td><strong>Evento</strong></td>
-                        <td><strong><a href="{% url 'public:subastas:detail' evento.pk %}">{{ evento.nombre }}</a></strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Ofertante</strong></td>
-                        <td><a href="{% url 'public:organizadores:detail' objeto_subasta_evento.tienda.pk %}">{{ objeto_subasta_evento.tienda.nombre }}</a></td>
-                    </tr>
                     {% if evento.tipo == 'VIRTUAL' %}
                         <tr>
                             <td style="width: 30%"><strong>Ámbito de ofertas</strong></td>
@@ -75,7 +67,7 @@
                         {% endif %}
                     {% else %}
                         <h3>La subasta de este artículo ha finalizado.</h3>
-                        <h3><a href="{% url 'public:productos:list_subasta' evento.pk %}">Ver otros artículos en subasta.</a></h3>
+                        <h3><a href="{% url 'public:productos:list_subasta' evento.pk %}">Ver otros productos en subasta.</a></h3>
                     {% endif %}
                 {% else %}
                     <h3>No participas en este evento.</h3>

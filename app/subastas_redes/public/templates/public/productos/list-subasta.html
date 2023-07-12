@@ -9,18 +9,6 @@
 <div class="pl-5 pr-5 mb-5 border-bottom box-shadow">
     <div class="container">
         <form class="form-inline">
-            <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-input" {% if request.GET.pintura %}checked="checked"{% endif %} type="checkbox" name="pintura" value="1" id="filtrar_pintura" />
-                <label class="form-check-label" for="filtrar_pintura">
-                    Pinturas
-                </label>
-            </div>
-            <div class="form-check mb-2 mr-sm-2">
-                <input class="form-check-input" {% if request.GET.moneda %}checked="checked"{% endif %} type="checkbox" name="moneda" value="1" id="filtrar_moneda" />
-                <label class="form-check-label" for="filtrar_moneda">
-                    Monedas
-                </label>
-            </div>
             <div class="input-group mb-2 mr-sm-2">
                 <div class="input-group-prepend">
                     <div class="input-group-text"><i class="far fa-dollar-sign"></i></div>

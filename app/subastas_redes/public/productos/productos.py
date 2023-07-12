@@ -57,12 +57,9 @@ def list(request, subasta_id=None, tienda_id=None):
         })
 
     else:
+        productos = Producto.objects.filter().all()
 
-        productos = []
-
-        catalogo_moneda = sorted(chain(monedas, pinturas), key=lambda data: data.nur, reverse=False)
-
-        paginator = Paginator(catalogo_moneda, 9)
+        paginator = Paginator(productos, 9)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
@@ -105,7 +102,7 @@ def detail(request, tipo, nur, subasta_id=None):
                 if data is not None:
                     messages.add_message(request, messages.SUCCESS, 'Hemos registrado tu oferta correctamente.')
 
-                    return redirect('public:productos:detail_subasta', tipo, evento.pk)
+                    return redirect('public:productos:detail_subasta', tipo, subasta_id)
 
             else:
                 messages.add_message(request, messages.WARNING, 'No hemos podido procesar tu solicitud porque contiene errores.')
