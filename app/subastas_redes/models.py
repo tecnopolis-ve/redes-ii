@@ -71,13 +71,9 @@ class User(AbstractUser, BaseModel):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     nombre = models.CharField(max_length=64)
-    segundo_nombre = models.CharField(max_length=64, default=None, blank=True, null=True)
     apellido = models.CharField(max_length=64)
-    segundo_apellido = models.CharField(max_length=64, default=None, blank=True, null=True)
-    fecha_nac = models.DateField()
+    fecha_nac = models.DateField(blank=True, null=True)
     telefono = models.CharField(max_length=64, unique=True)
-    nacionalidad = models.ForeignKey(Pais, on_delete=models.CASCADE, related_name='coleccionista_nacionalidad')
-    vive = models.ForeignKey(Pais, on_delete=models.CASCADE, related_name='coleccionista_pais_domicilio')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -92,9 +88,7 @@ class User(AbstractUser, BaseModel):
     def nombre_completo(self):
         nombre = []
         nombre.append(self.nombre)
-        nombre.append(self.segundo_nombre)
         nombre.append(self.apellido)
-        nombre.append(self.segundo_apellido)
         nombre_apellido = ' '.join(filter(None, nombre)) 
         return nombre_apellido if nombre_apellido else None
 
@@ -102,16 +96,9 @@ class User(AbstractUser, BaseModel):
         return self.email
 
 class Tienda(BaseModel):
-
-    _ALCANCE = (
-        ('LOCAL', 'Local'),
-        ('MUNDIAL', 'Mundial'),
-    )
-
     nombre = models.CharField(max_length=255)
     descripcion = models.TextField()
     fundacion = models.DateField()
-    website = models.CharField(max_length=255)
     email = models.CharField(max_length=64, default=None, blank=True, null=True)
     telefono = models.CharField(max_length=64, unique=True)
 
@@ -151,6 +138,8 @@ class Producto(BaseModel):
 
     tipo_puja = models.CharField(max_length=16, choices=_TIPO_PUJA, default='DINAMICA')
     tienda = models.ForeignKey(Tienda, on_delete=models.CASCADE, blank=True, null=True)
+    titulo = models.CharField(max_length=255)
+    descripcion = models.TextField()
     bid = models.FloatField(default=0)
     ask = models.FloatField(default=0)
     precio = models.FloatField(default=None, blank=True, null=True)

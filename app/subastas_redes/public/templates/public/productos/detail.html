@@ -5,14 +5,14 @@
 {% endblock %}
 
 {% block body %}
-<div class="jumbotron jumbotron-fluid jumbotron-image" style="background-image: url({{ articulo.imagen.url }});">
+<div class="jumbotron jumbotron-fluid jumbotron-image" style="background-image: url({{ producto.imagen.url }});">
     <div class="container"></div>
   </div>
 
 <div class="container mb-5" >
     <div class="row mb-5">
         <div class="col-sm">
-            <h1>{{ articulo.nombre }}</h1>
+            <h1>{{ producto.nombre }}</h1>
         </div>
     </div>
     {% include './commons_subasta.html' %}
@@ -22,68 +22,64 @@
             <table class="table">
                 <tbody>
                     <tr>
-                        <td><strong>NUR</strong></td>
-                        <td>{{ articulo.nur }}</td>
+                        <td><strong>Título</strong></td>
+                        <td>{{ producto.nombre }}</td>
                     </tr>
                     <tr>
-                        <td><strong>Nombre</strong></td>
-                        <td>{{ articulo.nombre }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Divisa</strong></td>
-                        <td>{{ articulo.divisa }}</td>
+                        <td><strong>Descripción</strong></td>
+                        <td>{{ producto.divisa }}</td>
                     </tr>
                     <tr>
                         <td><strong>Denominación</strong></td>
-                        <td>{{ articulo.denominacion }}</td>
+                        <td>{{ producto.denominacion }}</td>
                     </tr>
                     <tr>
                         <td><strong>Forma</strong></td>
-                        <td>{{ articulo.get_forma_display }}</td>
+                        <td>{{ producto.get_forma_display }}</td>
                     </tr>
                     <tr>
                         <td><strong>Metal</strong></td>
-                        <td>{{ articulo.get_metal_display }}</td>
+                        <td>{{ producto.get_metal_display }}</td>
                     </tr>
                     <tr>
                         <td><strong>Canto</strong></td>
-                        <td>{{ articulo.get_canto_display }}</td>
+                        <td>{{ producto.get_canto_display }}</td>
                     </tr>
                     <tr>
                         <td><strong>Diámetro</strong></td>
-                        <td>{{ articulo.diametro }} mm</td>
+                        <td>{{ producto.diametro }} mm</td>
                     </tr>
                     <tr>
                         <td><strong>Peso</strong></td>
-                        <td>{{ articulo.peso }} g</td>
+                        <td>{{ producto.peso }} g</td>
                     </tr>
                     <tr>
                         <td><strong>Año de emisión</strong></td>
-                        <td>{{ articulo.anyo_emision }}</td>
+                        <td>{{ producto.anyo_emision }}</td>
                     </tr>
                     <tr>
                         <td><strong>Acuñación</strong></td>
-                        <td>{{ articulo.org_acunyacion }}</td>
+                        <td>{{ producto.org_acunyacion }}</td>
                     </tr>
                     <tr>
                         <td><strong>País de acuñación</strong></td>
-                        <td>{{ articulo.pais_acunyacion }}</td>
+                        <td>{{ producto.pais_acunyacion }}</td>
                     </tr>
                     <tr>
                         <td><strong>Motivo</strong></td>
-                        <td>{{ articulo.motivo }}</td>
+                        <td>{{ producto.motivo }}</td>
                     </tr>
                     <tr>
                         <td><strong>Anverso</strong></td>
-                        <td>{{ articulo.anverso }}</td>
+                        <td>{{ producto.anverso }}</td>
                     </tr>
                     <tr>
                         <td><strong>Reverso</strong></td>
-                        <td>{{ articulo.reverso }}</td>
+                        <td>{{ producto.reverso }}</td>
                     </tr>
                     <tr>
                         <td><strong>Mintage</strong></td>
-                        <td>{{ articulo.total_mintage }}</td>
+                        <td>{{ producto.total_mintage }}</td>
                     </tr>
                 </tbody>
             </table>

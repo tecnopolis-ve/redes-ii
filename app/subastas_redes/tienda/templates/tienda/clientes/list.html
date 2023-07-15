@@ -16,8 +16,6 @@
             <th>Nombre completo</th>
             <th>Fecha de nacimiento</th>
             <th>Teléfono</th>
-            <th>Nacionalidad</th>
-            <th>Vive</th>
             <th>Fecha de registro</th>
             <th></th>
         </tr>
@@ -26,11 +24,9 @@
         {% for client in data %}
             <tr>
                 <td>{{ client.num_exp_unico }}</td>
-                <td>{{ client.coleccionista.nombre_completo }}</td>
-                <td>{{ client.coleccionista.fecha_nac|date:'d-m-Y' }}</td>
-                <td>{{ client.coleccionista.telefono }}</td>
-                <td>{{ client.coleccionista.nacionalidad }}</td>
-                <td>{{ client.coleccionista.vive }}</td>
+                <td>{{ client.nombre_completo }}</td>
+                <td>{{ client.fecha_nac|date:'d-m-Y' }}</td>
+                <td>{{ client.telefono }}</td>
                 <td>{{ client.created }}</td>
                 <td>
                     <ul class="list-inline">

@@ -14,7 +14,7 @@ from django.http import HttpResponse
 @login_required
 @user_passes_test(lambda u:not (u.is_admin or u.is_superuser))
 def list(request):
-    facturas = Factura.objects.filter(coleccionista=request.user.pk)
+    facturas = Factura.objects.filter(cliente=request.user.pk)
     return render(request, "usuario/facturas/list.html", {
         'data': facturas,
     })
@@ -40,7 +40,7 @@ def detail(request, factura_id):
 
 	return django_response
 
-    # factura = Factura.objects.filter(coleccionista=request.user.pk, pk=factura_id).prefetch_related('coleccionista').first()
+    # factura = Factura.objects.filter(cliente=request.user.pk, pk=factura_id).prefetch_related('cliente').first()
     # item_factura = ItemFactura.objects.filter(factura=factura.pk).prefetch_related('objeto_subasta_evento').all()
 
     # html_string = render_to_string('usuario/facturas/factura.html', {'factura': factura, 'item_factura': item_factura})

@@ -9,30 +9,28 @@
 {% block subcontent %}
 
 <div class="tab-content pt-5" id="myTabContent">
-    <div class="tab-pane fade active show" id="monedas" role="tabpanel" aria-labelledby="eventos-tab">
-        <table id="monedas_data" class="table table-striped table-bordered dataTable no-footer" style="width:100%">
+    <div class="tab-pane fade active show" id="productos" role="tabpanel" aria-labelledby="eventos-tab">
+        <table id="productos_data" class="table table-striped table-bordered dataTable no-footer" style="width:100%">
             <thead>
                 <tr>
                     <th></th>
-                    <th>NUR</th>
-                    <th>Nombre</th>
+                    <th>Título</th>
                     <th>Precio de salida</th>
                     <th>Precio de compra</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                {% for elem in monedas %}
+                {% for elem in productos %}
                     <tr>
-                        <td>{% if elem.moneda.imagen_thumb %}<img src="{{ elem.moneda.imagen_thumb.url }}" alt="" width="100" />{% endif %}</td>
-                        <td>{{ elem.moneda.nur }}</td>
-                        <td>{{ elem.moneda.nombre }}</td>
+                        <td>{% if elem.imagen_thumb %}<img src="{{ elem.imagen_thumb.url }}" alt="" width="100" />{% endif %}</td>
+                        <td>{{ elem.titulo }}</td>
                         <td>{{ elem.ask_display }}</td>
                         <td>{{ elem.bid_display }}</td>
                         <td>
                             <ul class="list-inline">
                                 <li class="list-inline-item"><a href="{% url 'usuario:productos:detail' elem.pk %}"><i class="far fa-file-certificate"></i> Certificado</a></li>
-                                <li class="list-inline-item"><a target="_blank" href="{% url 'public:productos:detail' 'moneda' elem.moneda.nur %}">Ver ficha <i class="far fa-fw fa-external-link-alt"></i></a></li>
+                                <li class="list-inline-item"><a target="_blank" href="{% url 'public:productos:detail' elem.pk %}">Ver ficha <i class="far fa-fw fa-external-link-alt"></i></a></li>
                             </ul>
                         </td>
                     </tr>
@@ -45,8 +43,7 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th>NUR</th>
-                    <th>Título</th>
+                    <th>Nombre</th>
                     <th>Precio de salida</th>
                     <th>Precio de compra</th>
                     <th></th>
@@ -55,15 +52,14 @@
             <tbody>
                 {% for elem in pinturas %}
                     <tr>
-                        <td>{% if elem.pintura.imagen_thumb %}<img src="{{ elem.pintura.imagen_thumb.url }}" alt="" width="100" />{% endif %}</td>
-                        <td>{{ elem.pintura.nur }}</td>
-                        <td>{{ elem.pintura.titulo }}</td>
+                        <td>{% if elem.imagen_thumb %}<img src="{{ elem.imagen_thumb.url }}" alt="" width="100" />{% endif %}</td>
+                        <td>{{ elem.nombre }}</td>
                         <td>{{ elem.ask_display }}</td>
                         <td>{{ elem.bid_display }}</td>
                         <td>
                             <ul class="list-inline">
                                 <li class="list-inline-item"><a href="{% url 'usuario:productos:detail' elem.pk %}"><i class="far fa-file-certificate"></i> Certificado</a></li>
-                                <li class="list-inline-item"><a target="_blank" href="{% url 'public:productos:detail' 'pintura' elem.pintura.nur %}">Ver ficha <i class="far fa-fw fa-external-link-alt"></i></a></li>
+                                <li class="list-inline-item"><a target="_blank" href="{% url 'public:productos:detail' 'pintura' elem.nur %}">Ver ficha <i class="far fa-fw fa-external-link-alt"></i></a></li>
                             </ul>
                         </td>
                     </tr>

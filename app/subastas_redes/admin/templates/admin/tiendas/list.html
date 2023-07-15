@@ -17,9 +17,6 @@
     <thead>
         <tr>
             <th>Nombre</th>
-            <th>Propósito</th>
-            <th>País</th>
-            <th>Alcance</th>
             <th>Fecha&nbsp;de&nbsp;fundación</th>
             <th>Últ.&nbsp;Modificación</th>
             <th></th>
@@ -29,9 +26,6 @@
         {% for tienda in data %}
             <tr>
                 <td>{{ tienda.nombre }}</td>
-                <td>{{ tienda.proposito|truncatechars:256 }}</td>
-                <td>{{ tienda.pais }}</td>
-                <td>{{ tienda.get_alcance_display }}</td>
                 <td>{{ tienda.fundacion|date:'d-m-Y' }}</td>
                 <td>{{ tienda.modified }}</td>
                 <td>

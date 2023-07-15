@@ -26,23 +26,19 @@
                     </tr>
                     <tr>
                         <td><strong>Nombre</strong></td>
-                        <td>{{ contacto.nombre }} {{ contacto.segundo_nombre }}</td>
+                        <td>{{ contacto.user.nombre }}</td>
                     </tr>
                     <tr>
                         <td><strong>Apellidos</strong></td>
-                        <td>{{ contacto.apellido }} {{ contacto.segundo_apellido }}</td>
+                        <td>{{ contacto.user.apellido }}</td>
                     </tr>
                     <tr>
                         <td><strong>Teléfono</strong></td>
-                        <td>{{ contacto.telefono }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Cargo</strong></td>
-                        <td>{{ contacto.cargo }}</td>
+                        <td>{{ contacto.user.telefono }}</td>
                     </tr>
                     <tr>
                         <td><strong>Fecha de nacimiento</strong></td>
-                        <td>{{ contacto.fecha_nac|date:'d-m-Y' }}</td>
+                        <td>{{ contacto.user.fecha_nac|date:'d-m-Y' }}</td>
                     </tr>
                 </tbody>
             </table>

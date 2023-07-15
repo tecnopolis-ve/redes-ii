@@ -30,16 +30,8 @@
                         <td>{{ tienda.nombre }}</td>
                     </tr>
                     <tr>
-                        <td><strong>Propósito</strong></td>
-                        <td>{{ tienda.proposito|linebreaks }}</td>
-                    </tr>
-                    <tr>
                         <td><strong>Fecha de inauguración</strong></td>
                         <td>{{ tienda.fundacion|date:'d-m-Y' }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Web</strong></td>
-                        <td>{{ tienda.website }}</td>
                     </tr>
                     <tr>
                         <td><strong>e-mail</strong></td>
@@ -48,14 +40,6 @@
                     <tr>
                         <td><strong>Teléfono</strong></td>
                         <td>{{ tienda.telefono }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Alcance</strong></td>
-                        <td>{{ tienda.get_alcance_display }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>País</strong></td>
-                        <td>{{ tienda.pais }}</td>
                     </tr>
                 </tbody>
             </table>

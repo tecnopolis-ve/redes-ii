@@ -13,7 +13,7 @@ from django.core.exceptions import ValidationError
 def list(request):
     tienda_id = request.user.contacto.tienda.pk
     data = Producto.objects.filter(
-        tienda_id=tienda_id, coleccionista_id__isnull=True
+        tienda_id=tienda_id, ganador_id__isnull=True
     ).all()
     return render(request, "tienda/productos/list.html", {"data": data})
 
@@ -21,7 +21,7 @@ def list(request):
 @login_required
 @user_passes_test(lambda u: u.is_admin)
 def detail(request, id):
-    producto = Producto.objects.get(pk=id, coleccionista_id__isnull=True)
+    producto = Producto.objects.get(pk=id, ganador_id__isnull=True)
     return render(
         request, "tienda/productos/detail.html", {"producto": producto}
     )
@@ -53,7 +53,7 @@ def add(request):
 @login_required
 @user_passes_test(lambda u: u.is_admin)
 def edit(request, id):
-    producto = Producto.objects.get(pk=id, coleccionista_id__isnull=True)
+    producto = Producto.objects.get(pk=id, ganador_id__isnull=True)
     form = ProductoForm(instance=producto)
 
     data = []
@@ -84,7 +84,7 @@ def edit(request, id):
 @login_required
 @user_passes_test(lambda u: u.is_admin)
 def delete(request, id):
-    producto = Producto.objects.get(pk=id, coleccionista_id__isnull=True)
+    producto = Producto.objects.get(pk=id, ganador_id__isnull=True)
     producto.delete()
     messages.add_message(request, messages.SUCCESS, "Registro {} eliminado.".format(id))
     return redirect("tienda:productos:productos")
