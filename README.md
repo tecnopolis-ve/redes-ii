@@ -1,7 +1,7 @@
 
-# subastARTE WebApp Readme
+# Subastas WebApp Readme
 
-Esta es la documentación del proyecto web subastARTE, una plataforma abierta a todo el público y especialmente dirigida a aquellas pequeñas empresas que se dedican a la venta de obras de arte y otros objetos de colección para que puedan contar con una plataforma tecnológica que les permita fácil y rápido llegar a más clientes así como gestionar de forma eficiente sus eventos y demás procesos relativos al negocio.
+Esta es la documentación del proyecto web Subastas, una plataforma abierta a todo el público y especialmente dirigida a aquellas pequeñas empresas que se dedican a la venta de obras de arte y otros objetos de colección para que puedan contar con una plataforma tecnológica que les permita fácil y rápido llegar a más clientes así como gestionar de forma eficiente sus eventos y demás procesos relativos al negocio.
 
 ## Pasos previos
 
