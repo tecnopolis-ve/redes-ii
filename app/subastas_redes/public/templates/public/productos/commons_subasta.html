@@ -30,9 +30,6 @@
                             <td style="width: 30%"><strong>Ámbito de ofertas</strong></td>
                             <td>
                                 <p>{{ objeto_subasta_evento.tienda.get_alcance_display }}</p>
-                                {% if objeto_subasta_evento.tienda.alcance == 'LOCAL' %}
-                                    <div class="alert alert-primary" role="alert">Este producto solo está disponible para participantes residenciados en <strong>{{ objeto_subasta_evento.tienda.pais }}</strong>.</div>
-                                {% endif %}
                             </td>
                         </tr>
                     {% endif %}

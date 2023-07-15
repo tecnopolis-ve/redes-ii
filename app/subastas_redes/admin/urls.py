@@ -7,6 +7,4 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('users/', include(('subastas_redes.admin.users.urls', 'users'), namespace='users')),
     path('tiendas/', include(('subastas_redes.admin.tiendas.urls', 'tiendas'), namespace='tiendas')),
-    path('divisas/', include(('subastas_redes.admin.divisas.urls', 'divisas'), namespace='divisas')),
-    path('paises/', include(('subastas_redes.admin.paises.urls', 'paises'), namespace='paises')),
 ]

@@ -55,15 +55,6 @@ class UserManager(BaseUserManager):
     def set_password(self):
         pass
 
-class Pais(BaseModel):
-    nombre = models.CharField(max_length=255)
-    nacionalidad = models.CharField(max_length=255)
-
-    class Meta:
-        ordering = ('nombre',)
-
-    def __str__(self):
-        return self.nombre
 
 class User(AbstractUser, BaseModel):
     username = None
@@ -119,15 +110,6 @@ class Cliente(BaseModel):
     class Meta:
         unique_together = ('cliente', 'tienda',)
 
-class Divisa(BaseModel):
-    pais = models.ForeignKey(Pais, on_delete=models.CASCADE)
-    nombre = models.CharField(max_length=255)
-
-    class Meta:
-        ordering = ('nombre',)
-
-    def __str__(self):
-        return self.nombre
 
 class Producto(BaseModel):
 
@@ -145,11 +127,28 @@ class Producto(BaseModel):
     precio = models.FloatField(default=None, blank=True, null=True)
     orden = models.PositiveIntegerField(default=1)
     duracion_minima = models.PositiveIntegerField(default=1)
-    ganador = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+    imagen = models.ImageField(max_length=255, default=None, blank=True, null=True)
+    imagen_thumb = models.ImageField(max_length=255, default=None, blank=True, null=True)
 
     def save(self):
         self.ask = self.precio + (self.precio * self.porc_min_ganancia / 100)
+
+        if(self.imagen):
+            self.imagen_thumb = "th_{}".format(self.imagen)
+        else:
+            self.imagen_thumb = None
+
         super().save()
+
+        if(self.imagen):
+            img = Image.open(self.imagen.path)
+            if img.height > 250:
+                fixed_height = 250
+                height_percent = (fixed_height / float(img.size[1]))
+                width = int((float(img.size[0]) * float(height_percent)))
+                output_size = (width, fixed_height)
+                img.thumbnail(output_size)
+                img.save(self.imagen_thumb.path)
 
     @property
     def precio_display(self):
@@ -171,6 +170,7 @@ class Puja(BaseModel):
     participante = models.ForeignKey(User, on_delete=models.CASCADE)
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     bid = models.FloatField()
+    ganador = models.BooleanField(default=False)
 
     @property
     def bid_display(self):
