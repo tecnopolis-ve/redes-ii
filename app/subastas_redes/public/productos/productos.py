@@ -67,13 +67,13 @@ def list(request, subasta_id=None, tienda_id=None):
             'data': page_obj
         })
 
-def detail(request, tipo, nur, subasta_id=None):
+def detail(request, producto_id, subasta_id=None):
     
     render_view = None
     objeto_subasta_evento = None
     form = None
 
-    articulo = Producto.objects.get(pk=nur)
+    producto = Producto.objects.get(pk=producto_id)
     render_view = "public/productos/detail.html"
 
     if subasta_id:
@@ -93,22 +93,20 @@ def detail(request, tipo, nur, subasta_id=None):
 
             form = PujaForm(data=request.POST)
             if form.is_valid():
-                if objeto_subasta_evento.tipo_puja == 'DINAMICA':
-                    objeto_subasta_evento.bid = form.data.get('bid')
-                    objeto_subasta_evento.save()
-
+                objeto_subasta_evento.bid = form.data.get('bid')
+                objeto_subasta_evento.save()
                 data = form.save()
 
                 if data is not None:
                     messages.add_message(request, messages.SUCCESS, 'Hemos registrado tu oferta correctamente.')
 
-                    return redirect('public:productos:detail_subasta', tipo, subasta_id)
+                    return redirect('public:productos:detail_subasta', subasta_id)
 
             else:
                 messages.add_message(request, messages.WARNING, 'No hemos podido procesar tu solicitud porque contiene errores.')
 
     return render(request, render_view, {
-        'articulo': articulo, 
+        'producto': producto, 
         'form': form,
     })
     

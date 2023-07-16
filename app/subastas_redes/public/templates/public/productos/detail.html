@@ -10,24 +10,25 @@
   </div>
 
 <div class="container mb-5" >
+    <div class="row">
+        <div class="col-sm">
+            <h1>{{ producto.titulo }}</h1>
+        </div>
+    </div>
     <div class="row mb-5">
         <div class="col-sm">
-            <h1>{{ producto.nombre }}</h1>
+            {% autoescape off %}{{ producto.descripcion|linebreaks }}{% endautoescape %}
         </div>
     </div>
     {% include './commons_subasta.html' %}
     <div class="row">
         <div class="col-sm">
-            <h5>Información de la moneda</h5>
+            <h5>Información del vendedor</h5>
             <table class="table">
                 <tbody>
                     <tr>
-                        <td><strong>Título</strong></td>
-                        <td>{{ producto.nombre }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Descripción</strong></td>
-                        <td>{{ producto.descripcion }}</td>
+                        <td><strong>Nombre</strong></td>
+                        <td>{{ producto.titulo }}</td>
                     </tr>
                 </tbody>
             </table>

@@ -13,7 +13,7 @@ from django.core.exceptions import ValidationError
 def list(request):
     tienda_id = request.user.contacto.tienda.pk
     data = Producto.objects.filter(
-        tienda_id=tienda_id, ganador_id__isnull=True
+        tienda_id=tienda_id
     ).all()
     return render(request, "tienda/productos/list.html", {"data": data})
 
@@ -21,7 +21,7 @@ def list(request):
 @login_required
 @user_passes_test(lambda u: u.is_admin)
 def detail(request, id):
-    producto = Producto.objects.get(pk=id, ganador_id__isnull=True)
+    producto = Producto.objects.get(pk=id)
     return render(
         request, "tienda/productos/detail.html", {"producto": producto}
     )
@@ -40,9 +40,10 @@ def add(request):
 
             if data is not None:
                 messages.add_message(request, messages.SUCCESS, "Cambios guardados.")
-                return redirect("tienda:productos:productos")
+                return redirect("tienda:productos:list")
 
         else:
+            print(form.errors)
             messages.add_message(
                 request, messages.WARNING, "Existen errores en el formulario."
             )
@@ -53,7 +54,7 @@ def add(request):
 @login_required
 @user_passes_test(lambda u: u.is_admin)
 def edit(request, id):
-    producto = Producto.objects.get(pk=id, ganador_id__isnull=True)
+    producto = Producto.objects.get(pk=id)
     form = ProductoForm(instance=producto)
 
     data = []
@@ -67,7 +68,7 @@ def edit(request, id):
 
             if data is not None:
                 messages.add_message(request, messages.SUCCESS, "Cambios guardados.")
-                return redirect("tienda:productos:producto_edit", id)
+                return redirect("tienda:productos:edit", id)
 
         else:
             messages.add_message(
@@ -84,7 +85,7 @@ def edit(request, id):
 @login_required
 @user_passes_test(lambda u: u.is_admin)
 def delete(request, id):
-    producto = Producto.objects.get(pk=id, ganador_id__isnull=True)
+    producto = Producto.objects.get(pk=id)
     producto.delete()
     messages.add_message(request, messages.SUCCESS, "Registro {} eliminado.".format(id))
-    return redirect("tienda:productos:productos")
+    return redirect("tienda:productos:list")

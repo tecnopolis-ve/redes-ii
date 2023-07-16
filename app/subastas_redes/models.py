@@ -113,26 +113,16 @@ class Cliente(BaseModel):
 
 class Producto(BaseModel):
 
-    _TIPO_PUJA = (
-        ('DINAMICA', 'Dinámica'),
-        ('SOBRE_CERRADO', 'Sobre cerrado'),
-    )
-
-    tipo_puja = models.CharField(max_length=16, choices=_TIPO_PUJA, default='DINAMICA')
-    tienda = models.ForeignKey(Tienda, on_delete=models.CASCADE, blank=True, null=True)
+    tienda = models.ForeignKey(Tienda, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=255)
     descripcion = models.TextField()
-    bid = models.FloatField(default=0)
+    bid = models.FloatField(default=0, blank=True)
     ask = models.FloatField(default=0)
-    precio = models.FloatField(default=None, blank=True, null=True)
-    orden = models.PositiveIntegerField(default=1)
     duracion_minima = models.PositiveIntegerField(default=1)
     imagen = models.ImageField(max_length=255, default=None, blank=True, null=True)
     imagen_thumb = models.ImageField(max_length=255, default=None, blank=True, null=True)
 
     def save(self):
-        self.ask = self.precio + (self.precio * self.porc_min_ganancia / 100)
-
         if(self.imagen):
             self.imagen_thumb = "th_{}".format(self.imagen)
         else:
@@ -149,10 +139,6 @@ class Producto(BaseModel):
                 output_size = (width, fixed_height)
                 img.thumbnail(output_size)
                 img.save(self.imagen_thumb.path)
-
-    @property
-    def precio_display(self):
-        return '$' + str(self.precio)
 
     @property
     def bid_display(self):

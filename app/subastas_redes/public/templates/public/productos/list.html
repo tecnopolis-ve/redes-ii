@@ -23,9 +23,8 @@
                             <img class="card-img-top" src="{{ item.imagen_thumb.url }}" alt="" />
                         {% endif %}
                         <div class="card-body">
-                            <h5 class="card-title"><a href="{% url 'public:productos:detail' 'moneda' item.pk %}">{{ item.nombre }}</a></h5>
-                            <p class="card-text">{{ item.motivo }}</p>
-                            <p class="card-text"><small class="text-muted">NUR: {{ item.nur }}</small></p>
+                            <h5 class="card-title"><a href="{% url 'public:productos:detail' item.pk %}">{{ item.titulo }}</a></h5>
+                            <p class="card-text"><small class="text-muted">Precio: {{ item.ask }}</small></p>
                         </div>
                     </div>
                 </div>

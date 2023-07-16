@@ -14,7 +14,7 @@ from django.http import HttpResponse
 @login_required
 @user_passes_test(lambda u:not (u.is_admin or u.is_superuser))
 def list(request):
-    productos = Producto.objects.filter(ganador_id=request.user.pk)
+    productos = Producto.objects.all()
     return render(request, "usuario/productos/list.html", {
         'productos': productos,
     })
@@ -40,7 +40,7 @@ def detail(request, ose_id):
 
 	return django_response
 
-    # evento = ObjetoSubastaEvento.objects.filter(ganador=request.user.pk, pk=articulo_id).prefetch_related('ganador').first()
+    # evento = ObjetoSubastaEvento.objects.filter(ganador=request.user.pk, pk=producto_id).prefetch_related('ganador').first()
 
     # html_string = render_to_string('usuario/productos/certificado.html', {'evento': evento})
     # html = HTML(string=html_string)
