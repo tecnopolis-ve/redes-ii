@@ -10,15 +10,15 @@ class PujaForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             'participante': forms.HiddenInput(),
-            'objeto_subasta_evento': forms.HiddenInput(),
+            'producto': forms.HiddenInput(),
         }
 
     def clean(self):
         cleaned_data = super(PujaForm, self).clean()
         bid = cleaned_data.get("bid")
-        objeto_subasta_evento = cleaned_data.get("objeto_subasta_evento")
+        producto = cleaned_data.get("producto")
 
-        current_max = max(objeto_subasta_evento.bid + 1, objeto_subasta_evento.ask)
+        current_max = max(producto.bid + 1, producto.ask)
 
         if not bid or bid < current_max:
             self.add_error('bid', _("El precio de oferta no puede ser menor a ${}".format(current_max)))

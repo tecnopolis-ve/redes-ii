@@ -67,46 +67,45 @@ def list(request, subasta_id=None, tienda_id=None):
             'data': page_obj
         })
 
-def detail(request, producto_id, subasta_id=None):
+def detail(request, producto_id):
     
     render_view = None
-    objeto_subasta_evento = None
+    item_admite_ofertas = True
     form = None
 
     producto = Producto.objects.get(pk=producto_id)
     render_view = "public/productos/detail.html"
 
-    if subasta_id:
+    usuario_id = request.user.pk
 
-        usuario_id = request.user.pk
+    if usuario_id:
+        puja = Puja()
+        puja.participante = request.user
+        puja.producto = producto
+        form = PujaForm(instance=puja)
 
-        if usuario_id:
-            cliente = Cliente.objects.filter(tienda_id=objeto_subasta_evento.tienda.pk).filter(coleccionista__pk=usuario_id).first()
-            if cliente:
-                puja = Puja()
-                puja.participante = cliente
-                puja.objeto_subasta_evento = objeto_subasta_evento
+    if producto.fecha_inicio + datetime.timedelta(days=producto.duracion) < timezone.now():
+        item_admite_ofertas = False
 
-                form = PujaForm(instance=puja)
+    if request.method == "POST":
+        form = PujaForm(data=request.POST)
+        if form.is_valid():
+            producto.bid = form.data.get('bid')
+            producto.save()
+            data = form.save()
 
-        if request.method == "POST":
+            if data is not None:
+                messages.add_message(request, messages.SUCCESS, 'Hemos registrado tu oferta correctamente.')
 
-            form = PujaForm(data=request.POST)
-            if form.is_valid():
-                objeto_subasta_evento.bid = form.data.get('bid')
-                objeto_subasta_evento.save()
-                data = form.save()
+                return redirect('public:productos:detail', producto_id)
 
-                if data is not None:
-                    messages.add_message(request, messages.SUCCESS, 'Hemos registrado tu oferta correctamente.')
-
-                    return redirect('public:productos:detail_subasta', subasta_id)
-
-            else:
-                messages.add_message(request, messages.WARNING, 'No hemos podido procesar tu solicitud porque contiene errores.')
+        else:
+            messages.add_message(request, messages.WARNING, 'No hemos podido procesar tu solicitud porque contiene errores.')
 
     return render(request, render_view, {
         'producto': producto, 
+        'item_admite_ofertas': item_admite_ofertas,
+        'participante': usuario_id,
         'form': form,
     })
     

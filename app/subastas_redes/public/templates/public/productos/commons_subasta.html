@@ -15,8 +15,12 @@
                     </tr>
                 {% endif  %}
                 <tr>
+                    <td><strong>Fecha de inicio</strong></td>
+                    <td>{{ producto.fecha_inicio }}</td>
+                </tr>
+                <tr>
                     <td><strong>Tiempo en subasta</strong></td>
-                    <td>{{ producto.duracion_minima }} minuto(s)</td>
+                    <td>{{ producto.duracion }} dias(s)</td>
                 </tr>
             </tbody>
         </table>
@@ -25,31 +29,31 @@
 <div class="row mb-5 text-center">
     <div class="col-sm">
         <div class="jumbotron">
+            {% if participante %}
                 {% if item_admite_ofertas %}
-                    {% if evento.estado == 'EN CURSO' %}
-                        <form method="post" novalidate="novalidate">
-                            {% csrf_token %}
-                            {% for hidden in form.hidden_fields %}
-                                {{ hidden }}
-                            {% endfor %}
-                            <div class="form-row justify-content-center">
-                                <div class="col-auto">
-                                    {{ form.bid | add_class:"form-control mb-2" }}
-                                    {{ form.bid.errors }}
-                                    <small class="form-text text-muted" style="text-align: left;">Realiza una oferta por {% if producto.bid %}{{ producto.next_bid_display }}{% else %}{{ producto.ask_display }}{% endif %} o más para participar.</small>
-                                </div>
-                                <div class="col-auto">
-                                    <button type="submit" class="btn btn-primary mb-2">Realizar una oferta</button>
-                                </div>
+                    <form method="post" novalidate="novalidate">
+                        {% csrf_token %}
+                        {% for hidden in form.hidden_fields %}
+                            {{ hidden }}
+                        {% endfor %}
+                        <div class="form-row justify-content-center">
+                            <div class="col-auto">
+                                {{ form.bid | add_class:"form-control mb-2" }}
+                                {{ form.bid.errors }}
+                                <small class="form-text text-muted" style="text-align: left;">Realiza una oferta por {% if producto.bid %}{{ producto.next_bid_display }}{% else %}{{ producto.ask_display }}{% endif %} o más para participar.</small>
                             </div>
-                        </form>
-                    {% elif evento.estado == 'PENDIENTE' %}
-                        <h3>Este evento aún no ha comenzado.</h3>
-                    {% endif %}
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary mb-2">Realizar una oferta</button>
+                            </div>
+                        </div>
+                    </form>
                 {% else %}
-                    <h3>La subasta de este artículo ha finalizado.</h3>
+                    <h3>No se admiten ofertas.</h3>
                     <h3><a href="{% url 'public:productos:list' %}">Ver otros productos en venta.</a></h3>
                 {% endif %}
+            {% else %}
+                <h3>Debes Iniciar sesión para participar.</h3>
+            {% endif %}
         </div>
     </div>
 </div>

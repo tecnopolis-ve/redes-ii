@@ -39,10 +39,17 @@
         </div>
     </div>
     <div class="form-group row">
-        {{ form.duracion_minima | label_class:"col-form-label col-sm-2" }}
+        {{ form.fecha_inicio | label_class:"col-form-label col-sm-2" }}
         <div class="col-sm-5">
-            {{ form.duracion_minima | add_class:"form-control" }}
-            {{ form.duracion_minima.errors }}
+            {{ form.fecha_inicio | add_class:"form-control" }}
+            {{ form.fecha_inicio.errors }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form.duracion | label_class:"col-form-label col-sm-2" }}
+        <div class="col-sm-5">
+            {{ form.duracion | add_class:"form-control" }}
+            {{ form.duracion.errors }}
         </div>
     </div>
     <div class="form-group row">

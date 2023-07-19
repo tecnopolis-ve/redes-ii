@@ -63,17 +63,11 @@ class User(AbstractUser, BaseModel):
     is_admin = models.BooleanField(default=False)
     nombre = models.CharField(max_length=64)
     apellido = models.CharField(max_length=64)
-    fecha_nac = models.DateField(blank=True, null=True)
-    telefono = models.CharField(max_length=64, unique=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects = UserManager()
-
-    @property
-    def edad(self):
-        return int((timezone.now().date() - self.fecha_nac).days / 365.25)
 
     @property
     def nombre_completo(self):
@@ -91,7 +85,6 @@ class Tienda(BaseModel):
     descripcion = models.TextField()
     fundacion = models.DateField()
     email = models.CharField(max_length=64, default=None, blank=True, null=True)
-    telefono = models.CharField(max_length=64, unique=True)
 
     def __str__(self):
         return self.nombre
@@ -112,13 +105,13 @@ class Cliente(BaseModel):
 
 
 class Producto(BaseModel):
-
     tienda = models.ForeignKey(Tienda, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=255)
     descripcion = models.TextField()
     bid = models.FloatField(default=0, blank=True)
     ask = models.FloatField(default=0)
-    duracion_minima = models.PositiveIntegerField(default=1)
+    fecha_inicio = models.DateTimeField(default=timezone.now)
+    duracion = models.PositiveIntegerField(default=1)
     imagen = models.ImageField(max_length=255, default=None, blank=True, null=True)
     imagen_thumb = models.ImageField(max_length=255, default=None, blank=True, null=True)
 

@@ -14,8 +14,6 @@
         <tr>
             <th>ID</th>
             <th>Nombre completo</th>
-            <th>Fecha de nacimiento</th>
-            <th>Teléfono</th>
             <th>Fecha de registro</th>
             <th></th>
         </tr>
@@ -25,8 +23,6 @@
             <tr>
                 <td>{{ client.num_exp_unico }}</td>
                 <td>{{ client.nombre_completo }}</td>
-                <td>{{ client.fecha_nac|date:'d-m-Y' }}</td>
-                <td>{{ client.telefono }}</td>
                 <td>{{ client.created }}</td>
                 <td>
                     <ul class="list-inline">
