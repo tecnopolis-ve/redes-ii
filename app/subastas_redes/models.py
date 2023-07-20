@@ -160,7 +160,6 @@ class Factura(BaseModel):
     cliente = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha = models.DateField()
     total_monto = models.FloatField()
-    total_manejo_envio = models.FloatField()
 
     def __str__(self):
         return self.numero
@@ -170,12 +169,8 @@ class Factura(BaseModel):
         return '$' + str(self.total_monto)
 
     @property
-    def total_manejo_envio_display(self):
-        return '$' + str(self.total_manejo_envio)
-
-    @property
     def gran_total_display(self):
-        return '$' + str(self.total_monto + self.total_manejo_envio)
+        return '$' + str(self.total_monto)
 
 class ItemFactura(BaseModel):
     factura = models.ForeignKey(Factura, on_delete=models.CASCADE)

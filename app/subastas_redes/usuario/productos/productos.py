@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import user_passes_test, login_required
-from subastas_redes.models import Producto
+from subastas_redes.models import Puja
 # from django.http import HttpResponse
 # from django.template.loader import render_to_string
 # from weasyprint import HTML
@@ -14,7 +14,7 @@ from django.http import HttpResponse
 @login_required
 @user_passes_test(lambda u:not (u.is_admin or u.is_superuser))
 def list(request):
-    productos = Producto.objects.all()
+    productos = Puja.objects.filter(participante__pk=request.user.pk, ganador=True).all()
     return render(request, "usuario/productos/list.html", {
         'productos': productos,
     })

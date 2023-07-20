@@ -20,8 +20,14 @@
                 </tr>
                 <tr>
                     <td><strong>Tiempo en subasta</strong></td>
-                    <td>{{ producto.duracion }} dias(s)</td>
+                    <td>{{ producto.duracion }} dia(s)</td>
                 </tr>
+                {% if usuario_ganador %}
+                    <tr>
+                        <td><strong>Ganador</strong></td>
+                        <td>{{ usuario_ganador.participante.nombre_completo }}</td>
+                    </tr>
+                {% endif %}
             </tbody>
         </table>
     </div>
@@ -48,8 +54,12 @@
                         </div>
                     </form>
                 {% else %}
-                    <h3>No se admiten ofertas.</h3>
-                    <h3><a href="{% url 'public:productos:list' %}">Ver otros productos en venta.</a></h3>
+                    {% if es_ganador %}
+                        <h3>Felicidades, ganaste esta subasta.</h3>
+                    {% else %}
+                        <h3>No se admiten ofertas.</h3>
+                        <h3><a href="{% url 'public:productos:list' %}">Ver otros productos en venta.</a></h3>
+                    {% endif %}
                 {% endif %}
             {% else %}
                 <h3>Debes Iniciar sesión para participar.</h3>

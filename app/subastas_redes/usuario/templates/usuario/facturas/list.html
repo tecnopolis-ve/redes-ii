@@ -13,7 +13,6 @@
                 <th>Número</th>
                 <th>Fecha</th>
                 <th>Subtotal</th>
-                <th>Manejo y envío</th>
                 <th>Total</th>
                 <th></th>
             </tr>
@@ -24,7 +23,6 @@
                     <td>{{ elem.pk }}</td>
                     <td>{{ elem.fecha|date:'d-m-Y' }}</td>
                     <td>{{ elem.total_monto_display }}</td>
-                    <td>{{ elem.total_manejo_envio_display }}</td>
                     <td>{{ elem.gran_total_display }}</td>
                     <td>
                         <ul class="list-inline">
@@ -35,5 +33,4 @@
             {% endfor %}
         </tbody>
     </table>
-
 {% endblock %}
